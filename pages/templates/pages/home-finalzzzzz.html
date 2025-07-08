@@ -1,0 +1,385 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Onehux Accounts - One Account For Everything{% endblock %}
+
+{% block meta_description %}Onehux Accounts provides secure, unified identity management across 100+ Onehux products and services. Sign up once, access everything with enhanced security features.{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-onehux-blue to-blue-700 text-white">
+        <div class="container mx-auto px-4 py-16 md:py-24">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">One Account, <span class="text-onehux-yellow">Endless Possibilities</span></h1>
+                    <p class="text-lg md:text-xl text-gray-100">Access all Onehux products and services with a single secure account. No need to remember multiple passwords or create new accounts.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'users:dashboard' %}" class="px-6 py-3 bg-onehux-yellow text-onehux-blue font-semibold rounded-md hover:bg-yellow-300 transition text-center">Dashboard</a>
+                        {% else %}
+                            <a href="{% url 'users:register' %}" class="px-6 py-3 bg-onehux-yellow text-onehux-blue font-semibold rounded-md hover:bg-yellow-300 transition text-center">Create Account</a>
+                        {% endif %}
+                        
+
+                        <a href="{% url 'pages:about' %}" class="px-6 py-3 bg-white/10 text-white font-semibold rounded-md hover:bg-white/20 transition text-center">Learn More</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <img src="{% static 'img/onehux_ecosystem.svg' %}" alt="Onehux Account Illustration" class="w-full">
+                </div>
+            </div>
+        </div>
+        <!-- Wave Divider -->
+        <div class="w-full overflow-hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" class="w-full h-16 text-white fill-current">
+                <path d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,42.7C840,32,960,32,1080,42.7C1200,53,1320,75,1380,85.3L1440,96L1440,100L1380,100C1320,100,1200,100,1080,100C960,100,840,100,720,100C600,100,480,100,360,100C240,100,120,100,60,100L0,100Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Why Use Onehux Accounts?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our identity platform is designed to simplify your digital experience while keeping your data secure.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-onehux-blue/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-sign-in-alt text-xl text-onehux-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Single Sign-On</h3>
+                    <p class="text-gray-600">Access all Onehux services with just one login. No need to create multiple accounts or remember different passwords.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-onehux-blue/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-xl text-onehux-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Enhanced Security</h3>
+                    <p class="text-gray-600">Two-factor authentication, login alerts, and device management keep your account secure against unauthorized access.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-onehux-blue/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-user-circle text-xl text-onehux-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Profile Management</h3>
+                    <p class="text-gray-600">Manage your personal information in one place. Update once, and changes reflect across all Onehux services.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-onehux-blue/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fab fa-facebook text-xl text-onehux-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Social Login</h3>
+                    <p class="text-gray-600">Connect your Facebook, Google, or Microsoft account for quick and easy access to all Onehux services.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-onehux-blue/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-mobile-alt text-xl text-onehux-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">OTP Authentication</h3>
+                    <p class="text-gray-600">Sign in securely using one-time passwords sent to your mobile device for an extra layer of protection.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-onehux-blue/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-bell text-xl text-onehux-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Login Alerts</h3>
+                    <p class="text-gray-600">Receive notifications about login attempts from unrecognized devices or locations to protect your account.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Integration Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Integrated with 100+ Onehux Products</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">One account to access our entire ecosystem of products and services designed to simplify your life.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+                <!-- Product 1 -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="w-12 h-12 mx-auto bg-onehux-blue/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-store text-onehux-blue"></i>
+                    </div>
+                    <h4 class="font-medium text-gray-800">Onehux Business</h4>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="w-12 h-12 mx-auto bg-onehux-blue/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-globe text-onehux-blue"></i>
+                    </div>
+                    <h4 class="font-medium text-gray-800">Onehux Web Service</h4>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="w-12 h-12 mx-auto bg-onehux-blue/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-home text-onehux-blue"></i>
+                    </div>
+                    <h4 class="font-medium text-gray-800">Onehux Realestate</h4>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="w-12 h-12 mx-auto bg-onehux-blue/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-cash-register text-onehux-blue"></i>
+                    </div>
+                    <h4 class="font-medium text-gray-800">Onehux POS</h4>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="w-12 h-12 mx-auto bg-onehux-blue/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-robot text-onehux-blue"></i>
+                    </div>
+                    <h4 class="font-medium text-gray-800">Onehux AI</h4>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="w-12 h-12 mx-auto bg-onehux-blue/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-download text-onehux-blue"></i>
+                    </div>
+                    <h4 class="font-medium text-gray-800">Onehux Downloader</h4>
+                </div>
+                
+                <!-- Product 7 -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="w-12 h-12 mx-auto bg-onehux-blue/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-truck text-onehux-blue"></i>
+                    </div>
+                    <h4 class="font-medium text-gray-800">Onehux Courier</h4>
+                </div>
+                
+                <!-- Product 8 -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="w-12 h-12 mx-auto bg-onehux-blue/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-tools text-onehux-blue"></i>
+                    </div>
+                    <h4 class="font-medium text-gray-800">Onehux Tools</h4>
+                </div>
+                
+                <!-- Product 9 -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="w-12 h-12 mx-auto bg-onehux-blue/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-paint-brush text-onehux-blue"></i>
+                    </div>
+                    <h4 class="font-medium text-gray-800">Onehux Branding</h4>
+                </div>
+                
+                <!-- Product 10 -->
+                <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition text-center">
+                    <div class="w-12 h-12 mx-auto bg-onehux-blue/10 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-share-alt text-onehux-blue"></i>
+                    </div>
+                    <h4 class="font-medium text-gray-800">Onehux Autopost</h4>
+                </div>
+                
+                <!-- View All Button -->
+                <div class="col-span-full mt-6 text-center">
+                    <a href="#" class="inline-block px-6 py-3 bg-onehux-blue text-white font-semibold rounded-md hover:bg-onehux-blue/90 transition">View All Products</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">How Onehux Accounts Works</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Simple, secure, and seamless access to all Onehux services in just a few steps.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="relative">
+                    <div class="w-16 h-16 bg-onehux-blue rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6">1</div>
+                    <div class="hidden md:block absolute top-8 left-16 w-full h-1 bg-gray-200"></div>
+                    <h3 class="text-xl font-semibold mb-3">Create Your Account</h3>
+                    <p class="text-gray-600">Sign up once with your email, or connect your existing social accounts for instant access.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="relative">
+                    <div class="w-16 h-16 bg-onehux-blue rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6">2</div>
+                    <div class="hidden md:block absolute top-8 left-16 w-full h-1 bg-gray-200"></div>
+                    <h3 class="text-xl font-semibold mb-3">Secure Your Account</h3>
+                    <p class="text-gray-600">Enable two-factor authentication and customize your security preferences for enhanced protection.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div>
+                    <div class="w-16 h-16 bg-onehux-blue rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6">3</div>
+                    <h3 class="text-xl font-semibold mb-3">Access All Services</h3>
+                    <p class="text-gray-600">Use your Onehux account to instantly access any of our 100+ products and services without additional logins.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust & Security Section -->
+    <section class="py-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Your Security is Our Priority</h2>
+                <p class="text-gray-300 max-w-2xl mx-auto">We implement industry-leading security measures to protect your personal information and account.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Security Feature 1 -->
+                <div class="bg-gray-800 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-onehux-yellow/20 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-lock text-xl text-onehux-yellow"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">End-to-End Encryption</h3>
+                    <p class="text-gray-300">Your data is encrypted during transmission and storage to prevent unauthorized access.</p>
+                </div>
+                
+                <!-- Security Feature 2 -->
+                <div class="bg-gray-800 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-onehux-yellow/20 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-xl text-onehux-yellow"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Two-Factor Authentication</h3>
+                    <p class="text-gray-300">Add an extra layer of security with SMS or authenticator app verification.</p>
+                </div>
+                
+                <!-- Security Feature 3 -->
+                <div class="bg-gray-800 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-onehux-yellow/20 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-user-shield text-xl text-onehux-yellow"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Privacy Controls</h3>
+                    <p class="text-gray-300">Manage what information is shared across services with granular privacy settings.</p>
+                </div>
+                
+                <!-- Security Feature 4 -->
+                <div class="bg-gray-800 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-onehux-yellow/20 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-history text-xl text-onehux-yellow"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Activity Monitoring</h3>
+                    <p class="text-gray-300">Review your account activity and receive alerts for suspicious login attempts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-onehux-blue to-blue-700 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Simplify Your Digital Life?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Create your Onehux account today and experience seamless access to all our services.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'users:dashboard' %}" class="px-8 py-4 bg-onehux-yellow text-onehux-blue font-semibold rounded-md hover:bg-yellow-300 transition text-center">Your Dashboard</a>
+                {% else %}
+                    <a href="{% url 'users:register' %}" class="px-8 py-4 bg-onehux-yellow text-onehux-blue font-semibold rounded-md hover:bg-yellow-300 transition text-center">Create Free Account</a>
+                {% endif %}
+        
+
+                <a href="{% url 'pages:about' %}" class="px-8 py-4 bg-white/10 text-white font-semibold rounded-md hover:bg-white/20 transition text-center">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Find answers to common questions about Onehux Accounts.</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full text-left px-6 py-4 bg-gray-50 hover:bg-gray-100 transition flex items-center justify-between font-medium" onclick="toggleFAQ(1)">
+                        <span>What is Onehux Accounts?</span>
+                        <i id="faq-icon-1" class="fas fa-plus text-onehux-blue transition-transform"></i>
+                    </button>
+                    <div id="faq-content-1" class="px-6 py-4 bg-white hidden">
+                        <p class="text-gray-600">Onehux Accounts is the central identity provider for all Onehux products and services. It allows you to create a single account that can be used to access over 100 different Onehux platforms without needing to create separate accounts or remember multiple passwords.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full text-left px-6 py-4 bg-gray-50 hover:bg-gray-100 transition flex items-center justify-between font-medium" onclick="toggleFAQ(2)">
+                        <span>How secure is my Onehux Account?</span>
+                        <i id="faq-icon-2" class="fas fa-plus text-onehux-blue transition-transform"></i>
+                    </button>
+                    <div id="faq-content-2" class="px-6 py-4 bg-white hidden">
+                        <p class="text-gray-600">Onehux Accounts implements industry-leading security measures including end-to-end encryption, two-factor authentication, suspicious login detection, and regular security audits. We prioritize your account security and continuously update our systems to protect against emerging threats.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full text-left px-6 py-4 bg-gray-50 hover:bg-gray-100 transition flex items-center justify-between font-medium" onclick="toggleFAQ(3)">
+                        <span>Can I use social accounts to sign in?</span>
+                        <i id="faq-icon-3" class="fas fa-plus text-onehux-blue transition-transform"></i>
+                    </button>
+                    <div id="faq-content-3" class="px-6 py-4 bg-white hidden">
+                        <p class="text-gray-600">Yes, Onehux Accounts supports social login integration with Facebook, Google, and Microsoft accounts. You can link these accounts to your Onehux profile for quick and convenient access while maintaining the same level of security.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full text-left px-6 py-4 bg-gray-50 hover:bg-gray-100 transition flex items-center justify-between font-medium" onclick="toggleFAQ(4)">
+                        <span>What happens if I forget my password?</span>
+                        <i id="faq-icon-4" class="fas fa-plus text-onehux-blue transition-transform"></i>
+                    </button>
+                    <div id="faq-content-4" class="px-6 py-4 bg-white hidden">
+                        <p class="text-gray-600">If you forget your password, you can easily reset it through our secure password recovery process. We'll send a password reset link to your registered email or phone number, allowing you to create a new password and regain access to your account.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full text-left px-6 py-4 bg-gray-50 hover:bg-gray-100 transition flex items-center justify-between font-medium" onclick="toggleFAQ(5)">
+                        <span>Which Onehux services can I access with my account?</span>
+                        <i id="faq-icon-5" class="fas fa-plus text-onehux-blue transition-transform"></i>
+                    </button>
+                    <div id="faq-content-5" class="px-6 py-4 bg-white hidden">
+                        <p class="text-gray-600">Your Onehux account provides access to all Onehux products and services, including Onehux Business, Web Service, Realestate, POS, AI, Downloader, Courier, Tools, Branding, Autopost, Linktree, Trademark, and many more. One account unlocks our entire ecosystem of over 100 integrated services.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function toggleFAQ(id) {
+        const content = document.getElementById(`faq-content-${id}`);
+        const icon = document.getElementById(`faq-icon-${id}`);
+        
+        content.classList.toggle('hidden');
+        icon.classList.toggle('fa-plus');
+        icon.classList.toggle('fa-minus');
+        icon.classList.toggle('transform');
+        icon.classList.toggle('rotate-45');
+    }
+</script>
+{% endblock %}

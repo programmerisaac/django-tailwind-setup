@@ -1,0 +1,734 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Frequently Asked Questions - Tamaktech{% endblock %}
+
+{% block extra_css %}
+<meta name="description" content="Find answers to common questions about Tamaktech's electrical equipment, solar systems, generators, installation services, warranties, and more. Get expert support for all your electrical needs.">
+<meta name="keywords" content="Tamaktech FAQ, electrical equipment questions, solar system installation, generator support, electrical services, warranty information, technical support">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Tamaktech">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="Frequently Asked Questions - Tamaktech">
+<meta property="og:description" content="Get answers to all your questions about electrical equipment, solar systems, and professional installation services from Tamaktech experts.">
+<meta property="og:image" content="{% static 'images/tamaktech-faq-banner.jpg' %}">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta property="twitter:title" content="Frequently Asked Questions - Tamaktech">
+<meta property="twitter:description" content="Get answers to all your questions about electrical equipment, solar systems, and professional installation services from Tamaktech experts.">
+<meta property="twitter:image" content="{% static 'images/tamaktech-faq-banner.jpg' %}">
+
+<style>
+    .faq-item {
+        transition: all 0.3s ease;
+    }
+    .faq-icon {
+        transition: transform 0.3s ease;
+    }
+    .faq-icon.rotate {
+        transform: rotate(45deg);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<div class="bg-gray-100 py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="flex items-center space-x-4">
+                <li>
+                    <a href="{% url 'pages:home' %}" class="text-gray-500 hover:text-tamak-green transition-colors">
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <svg class="h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                </li>
+                <li>
+                    <span class="text-gray-700 font-medium">FAQ</span>
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-tamak-green via-tamak-green-dark to-gray-800 text-white py-16 lg:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="animate-on-scroll">
+            <h1 class="text-4xl lg:text-6xl font-bold mb-6">
+                Frequently Asked
+                <span class="text-tamak-yellow">Questions</span>
+            </h1>
+            <p class="text-xl lg:text-2xl text-green-100 mb-8 max-w-3xl mx-auto">
+                Find quick answers to common questions about our electrical equipment, solar systems, generators, and professional services.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#general-faq" class="bg-tamak-yellow hover:bg-tamak-yellow-dark text-gray-900 px-8 py-3 rounded-lg font-semibold transition-colors duration-300">
+                    Browse FAQ
+                </a>
+                <a href="{% url 'pages:contact' %}" class="border-2 border-white text-white hover:bg-white hover:text-tamak-green px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+                    Contact Support
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Search -->
+<section class="py-8 bg-white border-b border-gray-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div x-data="{ searchTerm: '', filteredFaqs: [] }" class="text-center">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Search FAQ</h2>
+            <div class="relative max-w-md mx-auto">
+                <input 
+                    type="text" 
+                    x-model="searchTerm"
+                    @input="filterFAQs()"
+                    placeholder="Search for answers..."
+                    class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-tamak-green focus:border-transparent"
+                >
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Categories -->
+<section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Browse by Category</h2>
+            <p class="text-xl text-gray-600">Quick navigation to find exactly what you're looking for</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- General Questions -->
+            <a href="#general-faq" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-tamak-green">
+                <div class="flex items-center mb-4">
+                    <div class="bg-tamak-green bg-opacity-10 p-3 rounded-lg mr-4">
+                        <svg class="h-6 w-6 text-tamak-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 group-hover:text-tamak-green transition-colors">General Questions</h3>
+                </div>
+                <p class="text-gray-600">About Tamaktech, our services, and general inquiries</p>
+            </a>
+
+            <!-- Products & Equipment -->
+            <a href="#products-faq" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-tamak-yellow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-tamak-yellow bg-opacity-10 p-3 rounded-lg mr-4">
+                        <svg class="h-6 w-6 text-tamak-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 group-hover:text-tamak-green transition-colors">Products & Equipment</h3>
+                </div>
+                <p class="text-gray-600">Questions about our electrical equipment and generators</p>
+            </a>
+
+            <!-- Solar Systems -->
+            <a href="#solar-faq" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-yellow-500">
+                <div class="flex items-center mb-4">
+                    <div class="bg-yellow-100 p-3 rounded-lg mr-4">
+                        <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 group-hover:text-tamak-green transition-colors">Solar Systems</h3>
+                </div>
+                <p class="text-gray-600">Solar installation, maintenance, and optimization</p>
+            </a>
+
+            <!-- Services & Installation -->
+            <a href="#services-faq" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-blue-500">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 group-hover:text-tamak-green transition-colors">Services & Installation</h3>
+                </div>
+                <p class="text-gray-600">Professional installation and maintenance services</p>
+            </a>
+
+            <!-- Orders & Shipping -->
+            <a href="#orders-faq" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-purple-500">
+                <div class="flex items-center mb-4">
+                    <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                        <svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M8 11v6h8v-6M8 11H6a2 2 0 00-2 2v6a2 2 0 002 2h12a2 2 0 002-2v-6a2 2 0 00-2-2h-2"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 group-hover:text-tamak-green transition-colors">Orders & Shipping</h3>
+                </div>
+                <p class="text-gray-600">Ordering process, payment, and delivery information</p>
+            </a>
+
+            <!-- Support & Warranty -->
+            <a href="#support-faq" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-red-500">
+                <div class="flex items-center mb-4">
+                    <div class="bg-red-100 p-3 rounded-lg mr-4">
+                        <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 group-hover:text-tamak-green transition-colors">Support & Warranty</h3>
+                </div>
+                <p class="text-gray-600">Technical support, warranties, and after-sales service</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Sections -->
+<section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- General Questions -->
+        <div id="general-faq" class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+                <div class="bg-tamak-green p-2 rounded-lg mr-4">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                General Questions
+            </h2>
+
+            <div class="space-y-4" x-data="{ openFaq: null }">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 1 ? null : 1" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">What services does Tamaktech offer?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 1 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 1" 
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            Tamaktech specializes in electrical equipment sales, solar system installation, generator supply and maintenance, home appliances, and comprehensive electrical services. We provide professional installation of electrical equipment, solar panels, machinery, and offer repair services for faulty electrical systems and equipment.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 2 ? null : 2" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">How long has Tamaktech been in business?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 2 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 2" 
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            Tamaktech has been serving customers for over a decade, building a reputation as a trusted partner for quality electrical equipment and professional services. Our experience spans residential, commercial, and industrial electrical solutions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 3 ? null : 3" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">What areas do you serve?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 3 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 3" 
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            We're based in Asaba, Delta State, and primarily serve customers across the Niger Delta region. For installation and maintenance services, we cover surrounding states. Products can be shipped nationwide with our reliable delivery partners.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products & Equipment -->
+        <div id="products-faq" class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+                <div class="bg-tamak-yellow p-2 rounded-lg mr-4">
+                    <svg class="h-6 w-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                    </svg>
+                </div>
+                Products & Equipment
+            </h2>
+
+            <div class="space-y-4" x-data="{ openFaq: null }">
+                <!-- FAQ Item 4 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 4 ? null : 4" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">What types of generators do you sell?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 4 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 4" 
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            We offer a comprehensive range of generators including portable generators (1KVA-10KVA), standby generators (10KVA-500KVA), diesel generators, petrol generators, and inverter generators. All our generators come from reputable brands with full warranty coverage and after-sales support.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 5 ? null : 5" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">Do you provide installation for the equipment you sell?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 5 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 5" 
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            Yes, we provide professional installation services for all equipment we sell. Our certified technicians ensure proper installation according to safety standards and manufacturer specifications. Installation includes testing, commissioning, and customer training on proper operation.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 6 ? null : 6" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">What electrical equipment brands do you carry?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 6 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 6" 
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            We partner with leading international and local brands including Schneider Electric, Siemens, ABB, Legrand, Havells, Mikano, Perkins, Cummins, and many others. We carefully select brands known for quality, reliability, and strong after-sales support to ensure customer satisfaction.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Solar Systems -->
+        <div id="solar-faq" class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+                <div class="bg-yellow-100 p-2 rounded-lg mr-4">
+                    <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </div>
+                Solar Systems
+            </h2>
+
+            <div class="space-y-4" x-data="{ openFaq: null }">
+                <!-- FAQ Item 7 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 7 ? null : 7" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">How do I determine the right solar system size for my home?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 7 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 7" 
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            We provide free site assessments and energy audits to determine the optimal solar system size. Our experts analyze your electricity bills, energy consumption patterns, roof space, and local solar irradiance to design a system that meets 80-100% of your energy needs cost-effectively.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 8 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 8 ? null : 8" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">What's the warranty on solar panels and components?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 8 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 8" 
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            Solar panels come with 25-year performance warranties and 10-15 year product warranties. Inverters have 5-10 year warranties, batteries 5-10 years, and installation work carries a 2-year warranty. We also offer extended warranty options and comprehensive maintenance packages.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 9 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 9 ? null : 9" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">How long does solar installation take?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 9 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 9" 
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            Residential solar installations typically take 1-3 days depending on system size and complexity. Commercial installations may take 1-2 weeks. This includes mounting panels, installing inverters, electrical connections, and system commissioning. We handle all permits and inspections.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services & Installation -->
+        <div id="services-faq" class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                    <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </div>
+                Services & Installation
+            </h2>
+
+            <div class="space-y-4" x-data="{ openFaq: null }">
+                <!-- FAQ Item 10 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 10 ? null : 10" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">Do you provide emergency electrical repair services?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 10 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 10" x-transition class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            Yes, we offer 24/7 emergency electrical services for critical issues like power outages, electrical faults, generator breakdowns, and safety hazards. Our response team is available via WhatsApp at +234 705 044 4211 for urgent electrical emergencies.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 11 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 11 ? null : 11" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">Are your technicians certified and insured?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 11 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 11" x-transition class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            All our technicians are certified professionals with relevant electrical qualifications and regular training updates. We carry comprehensive liability insurance and ensure all work complies with Nigerian electrical codes and safety standards.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 12 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 12 ? null : 12" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">What's included in your maintenance packages?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 12 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 12" x-transition class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            Our maintenance packages include regular inspections, cleaning, testing, preventive maintenance, priority service calls, discounted repairs, performance monitoring, and detailed maintenance reports. Packages are customized based on equipment type and usage patterns.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders & Shipping -->
+        <div id="orders-faq" class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+                <div class="bg-purple-100 p-2 rounded-lg mr-4">
+                    <svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M8 11v6h8v-6M8 11H6a2 2 0 00-2 2v6a2 2 0 002 2h12a2 2 0 002-2v-6a2 2 0 00-2-2h-2"/>
+                    </svg>
+                </div>
+                Orders & Shipping
+            </h2>
+
+            <div class="space-y-4" x-data="{ openFaq: null }">
+                <!-- FAQ Item 13 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 13 ? null : 13" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">What payment methods do you accept?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 13 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 13" x-transition class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            We accept bank transfers, cash payments, mobile payments (including Paystack, Flutterwave), and for larger purchases, we offer flexible payment plans and financing options. All transactions are secure and receipts are provided for every purchase.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 14 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 14 ? null : 14" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">How long does delivery take?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 14 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 14" x-transition class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            Local deliveries within Delta State typically take 1-2 business days. National deliveries take 3-7 business days depending on location. Large equipment may require special handling and take additional time. We provide tracking information for all shipments.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 15 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 15 ? null : 15" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">Can I return or exchange products?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 15 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 15" x-transition class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            Yes, we have a 7-day return policy for unused products in original packaging. Defective products can be returned within 30 days. Custom-ordered items and installed equipment have different return policies. Please review our complete return policy for specific terms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support & Warranty -->
+        <div id="support-faq" class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+                <div class="bg-red-100 p-2 rounded-lg mr-4">
+                    <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </div>
+                Support & Warranty
+            </h2>
+
+            <div class="space-y-4" x-data="{ openFaq: null }">
+                <!-- FAQ Item 16 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 16 ? null : 16" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">How do I claim warranty on purchased products?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 16 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 16" x-transition class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            Contact us with your purchase receipt and product serial number. We'll assess the issue and coordinate with manufacturers for warranty claims. Most warranty services are handled locally through our service center to minimize downtime and ensure quick resolution.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 17 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 17 ? null : 17" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">Do you provide technical support after purchase?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 17 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 17" x-transition class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            Yes, we provide comprehensive technical support including phone consultations, remote troubleshooting, on-site visits when necessary, user training, and ongoing maintenance guidance. Our support team is available during business hours with emergency support for critical systems.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 18 -->
+                <div class="faq-item bg-gray-50 rounded-lg border border-gray-200">
+                    <button @click="openFaq = openFaq === 18 ? null : 18" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors">
+                        <h3 class="text-lg font-semibold text-gray-900">What if I need spare parts for older equipment?</h3>
+                        <svg class="h-5 w-5 text-tamak-green faq-icon" :class="{ 'rotate': openFaq === 18 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </button>
+                    <div x-show="openFaq === 18" x-transition class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600 leading-relaxed">
+                            We maintain an extensive inventory of spare parts and have strong relationships with manufacturers and distributors. For older or discontinued models, we can source compatible parts or recommend suitable alternatives. Our parts department specializes in hard-to-find components.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Still Have Questions Section -->
+<section class="py-16 bg-gradient-to-br from-tamak-green to-tamak-green-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="animate-on-scroll">
+            <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">
+                Still Have Questions?
+            </h2>
+            <p class="text-xl text-green-100 mb-8">
+                Our expert team is here to help you find the perfect electrical solution for your needs.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <!-- Phone Support -->
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20">
+                    <div class="bg-tamak-yellow p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                        <svg class="h-8 w-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Call Us</h3>
+                    <p class="text-green-100 text-sm mb-3">Mon-Fri: 8AM-6PM, Sat: 9AM-4PM</p>
+                    <a href="tel:+2347050444211" class="text-tamak-yellow hover:text-tamak-yellow-dark font-semibold transition-colors">
+                        +234 705 044 4211
+                    </a>
+                </div>
+
+                <!-- WhatsApp Support -->
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20">
+                    <div class="bg-green-500 p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                        <svg class="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.119"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">WhatsApp</h3>
+                    <p class="text-green-100 text-sm mb-3">Instant messaging support</p>
+                    <a href="https://wa.me/2347050444211?text=Hello%20Tamaktech!%20I%20have%20a%20question%20about%20your%20services." 
+                       target="_blank"
+                       class="text-tamak-yellow hover:text-tamak-yellow-dark font-semibold transition-colors">
+                        Chat with us
+                    </a>
+                </div>
+
+                <!-- Email Support -->
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20">
+                    <div class="bg-blue-500 p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Email Us</h3>
+                    <p class="text-green-100 text-sm mb-3">We respond within 24 hours</p>
+                    <a href="mailto:info@tamaktech.com" class="text-tamak-yellow hover:text-tamak-yellow-dark font-semibold transition-colors">
+                        info@tamaktech.com
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'pages:contact' %}" 
+                   class="bg-tamak-yellow hover:bg-tamak-yellow-dark text-gray-900 px-8 py-3 rounded-lg font-semibold transition-colors duration-300">
+                    Contact Support
+                </a>
+                <a href="{% url 'products:products' %}" 
+                   class="border-2 border-white text-white hover:bg-white hover:text-tamak-green px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+                    Browse Products
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // FAQ search functionality
+    function filterFAQs() {
+        const searchTerm = document.querySelector('input[x-model="searchTerm"]').value.toLowerCase();
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('h3').textContent.toLowerCase();
+            const answer = item.querySelector('.faq-answer p').textContent.toLowerCase();
+            
+            if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = searchTerm === '' ? 'block' : 'none';
+            }
+        });
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-onehux-blue to-blue-700 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl font-bold mb-6">Welcome to Onehux Accounts</h1>
+        <p class="text-xl mb-8 text-blue-100">Your single sign-on solution for all Onehux services</p>
+        <p class="text-lg mb-8 text-blue-200">Simplifying Lives through unified authentication</p>
+        
+        <div class="flex justify-center space-x-4">
+            {% if not user.is_authenticated %}
+                <a href="/auth/register/" class="bg-onehux-yellow text-gray-800 px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors">
+                    Get Started
+                </a>
+                <a href="/auth/login/" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-onehux-blue transition-colors">
+                    Sign In
+                </a>
+            {% else %}
+                <a href="/account/" class="bg-onehux-yellow text-gray-800 px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors">
+                    Go to Dashboard
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">One Account, All Services</h2>
+            <p class="text-lg text-gray-600">Access all Onehux products with a single, secure account</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Single Sign-On -->
+            <div class="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-16 h-16 bg-onehux-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Secure Authentication</h3>
+                <p class="text-gray-600">Enterprise-grade security with two-factor authentication and advanced threat protection</p>
+            </div>
+            
+            <!-- Easy Access -->
+            <div class="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-16 h-16 bg-onehux-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Easy Access</h3>
+                <p class="text-gray-600">Quick and seamless access to all your favorite Onehux applications and services</p>
+            </div>
+            
+            <!-- Unified Experience -->
+            <div class="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-16 h-16 bg-onehux-red rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Unified Experience</h3>
+                <p class="text-gray-600">Consistent user experience across all Onehux platforms and applications</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="bg-gray-100 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Onehux Services</h2>
+            <p class="text-lg text-gray-600">Discover all the services available with your Onehux account</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Demo Service -->
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <h3 class="text-lg font-semibold mb-2">Demo SubX Service</h3>
+                <p class="text-gray-600 text-sm mb-4">A demo service provider for testing SSO integration</p>
+                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Available</span>
+            </div>
+            
+            <!-- POS -->
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <h3 class="text-lg font-semibold mb-2">Onehux POS</h3>
+                <p class="text-gray-600 text-sm mb-4">Point of Sale system for businesses</p>
+                <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Coming Soon</span>
+            </div>
+            
+            <!-- Real Estate -->
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <h3 class="text-lg font-semibold mb-2">Onehux Real Estate</h3>
+                <p class="text-gray-600 text-sm mb-4">Real estate management platform</p>
+                <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Coming Soon</span>
+            </div>
+            
+            <!-- AI -->
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <h3 class="text-lg font-semibold mb-2">Onehux AI</h3>
+                <p class="text-gray-600 text-sm mb-4">AI-powered tools and services</p>
+                <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Coming Soon</span>
+            </div>
+            
+            <!-- Courier -->
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <h3 class="text-lg font-semibold mb-2">Onehux Courier</h3>
+                <p class="text-gray-600 text-sm mb-4">Delivery and logistics management</p>
+                <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Coming Soon</span>
+            </div>
+            
+            <!-- Tools -->
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <h3 class="text-lg font-semibold mb-2">Onehux Tools</h3>
+                <p class="text-gray-600 text-sm mb-4">Productivity tools and utilities</p>
+                <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Coming Soon</span>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

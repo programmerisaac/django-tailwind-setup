@@ -1,0 +1,1890 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy - Tamaktech Nigeria | Data Protection & NDPR Compliance{% endblock %}
+
+{% block extra_css %}
+<meta name="description" content="Tamaktech Nigeria's comprehensive privacy policy covering data protection, NDPR compliance, customer information security, and your rights regarding personal data.">
+<meta name="keywords" content="Tamaktech privacy policy, NDPR compliance, data protection Nigeria, customer privacy, electrical equipment data security">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph Tags -->
+<meta property="og:title" content="Privacy Policy - Tamaktech Nigeria">
+<meta property="og:description" content="Learn how Tamaktech protects your personal data and complies with Nigerian Data Protection Regulation (NDPR).">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{% url 'pages:privacy' %}">
+<meta property="og:image" content="{% static 'images/tamaktech-privacy-og.jpg' %}">
+
+<!-- Twitter Card Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy - Tamaktech Nigeria">
+<meta name="twitter:description" content="Comprehensive privacy policy and data protection information for Tamaktech customers.">
+
+<!-- Schema.org structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PrivacyPolicy",
+  "name": "Tamaktech Privacy Policy",
+  "description": "Privacy policy for Tamaktech Nigeria electrical equipment and services",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Tamaktech Nigeria Limited",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{% static 'images/tamaktech-logo.png' %}"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Nigeria",
+      "addressLocality": "Lagos"
+    }
+  },
+  "datePublished": "2024-01-01",
+  "dateModified": "{{ current_date|date:'Y-m-d' }}",
+  "inLanguage": "en-NG"
+}
+</script>
+
+<style>
+.privacy-section {
+    scroll-margin-top: 100px;
+}
+
+.privacy-nav {
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.privacy-nav::-webkit-scrollbar {
+    width: 4px;
+}
+
+.privacy-nav::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 2px;
+}
+
+.privacy-nav::-webkit-scrollbar-thumb {
+    background: #16a34a;
+    border-radius: 2px;
+}
+
+.data-flow-animation {
+    animation: dataFlow 3s ease-in-out infinite;
+}
+
+@keyframes dataFlow {
+    0%, 100% { transform: translateX(0); opacity: 0.7; }
+    50% { transform: translateX(10px); opacity: 1; }
+}
+
+.shield-icon {
+    animation: shield-pulse 2s ease-in-out infinite;
+}
+
+@keyframes shield-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@media (max-width: 1024px) {
+    .privacy-nav {
+        position: static;
+        max-height: none;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav class="bg-gray-50 py-4" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ol class="flex items-center space-x-2 text-sm">
+            <li><a href="{% url 'pages:home' %}" class="text-gray-500 hover:text-tamak-green transition-colors">Home</a></li>
+            <li><span class="text-gray-400">/</span></li>
+            <li><span class="text-gray-900 font-medium">Privacy Policy</span></li>
+        </ol>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="bg-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:grid lg:grid-cols-4 lg:gap-8">
+            
+            <!-- Table of Contents (Desktop Sidebar) -->
+            <div class="hidden lg:block">
+                <div class="privacy-nav bg-gradient-to-br from-blue-50 to-green-50 rounded-xl p-6 border border-blue-100">
+                    <div class="flex items-center mb-4">
+                        <div class="shield-icon bg-blue-500 text-white rounded-full p-2 mr-3">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Privacy Navigation</h3>
+                    </div>
+                    <nav class="space-y-2">
+                        <a href="#overview" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">1. Policy Overview</a>
+                        <a href="#information" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">2. Information We Collect</a>
+                        <a href="#usage" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">3. How We Use Data</a>
+                        <a href="#sharing" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">4. Data Sharing</a>
+                        <a href="#security" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">5. Data Security</a>
+                        <a href="#retention" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">6. Data Retention</a>
+                        <a href="#rights" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">7. Your Rights (NDPR)</a>
+                        <a href="#cookies" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">8. Cookies & Tracking</a>
+                        <a href="#children" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">9. Children's Privacy</a>
+                        <a href="#international" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">10. International Transfers</a>
+                        <a href="#updates" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">11. Policy Updates</a>
+                        <a href="#contact" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">12. Contact & DPO</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="lg:col-span-3">
+                <!-- Header -->
+                <div class="text-center mb-12">
+                    <div class="flex justify-center mb-6">
+                        <div class="bg-gradient-to-br from-blue-500 to-green-500 p-4 rounded-2xl shadow-lg">
+                            <svg class="h-12 w-12 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h1 class="text-4xl font-bold text-gray-900 mb-4">Privacy Policy</h1>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+                        Your privacy is important to us. This policy explains how Tamaktech Nigeria Limited collects, uses, and protects your personal information in compliance with Nigerian Data Protection Regulation (NDPR).
+                    </p>
+                    
+                    <!-- NDPR Compliance Badge -->
+                    <div class="bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-xl p-6 max-w-2xl mx-auto">
+                        <div class="flex items-center justify-center mb-3">
+                            <svg class="h-8 w-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <h3 class="text-lg font-bold">NDPR Compliant</h3>
+                        </div>
+                        <p class="text-sm opacity-90">
+                            This privacy policy is fully compliant with the Nigeria Data Protection Regulation (NDPR) and international best practices for data protection.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <p class="text-sm text-gray-700">
+                            <strong>Last Updated:</strong> January 1, 2025 | 
+                            <strong>Effective Date:</strong> January 1, 2025 |
+                            <strong>Version:</strong> 3.0
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Mobile Table of Contents -->
+                <div class="lg:hidden mb-8" x-data="{ open: false }">
+                    <button @click="open = !open" class="w-full bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-4 flex items-center justify-between">
+                        <span class="font-medium text-gray-900 flex items-center">
+                            <svg class="h-5 w-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            Privacy Policy Navigation
+                        </span>
+                        <svg class="h-5 w-5 transform transition-transform" :class="{'rotate-180': open}" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-collapse class="mt-2 bg-gray-50 rounded-lg p-4 space-y-2 border border-gray-200">
+                        <a href="#overview" class="block text-sm text-gray-600 hover:text-tamak-green py-1">1. Policy Overview</a>
+                        <a href="#information" class="block text-sm text-gray-600 hover:text-tamak-green py-1">2. Information We Collect</a>
+                        <a href="#usage" class="block text-sm text-gray-600 hover:text-tamak-green py-1">3. How We Use Data</a>
+                        <a href="#sharing" class="block text-sm text-gray-600 hover:text-tamak-green py-1">4. Data Sharing</a>
+                        <a href="#security" class="block text-sm text-gray-600 hover:text-tamak-green py-1">5. Data Security</a>
+                        <a href="#retention" class="block text-sm text-gray-600 hover:text-tamak-green py-1">6. Data Retention</a>
+                        <a href="#rights" class="block text-sm text-gray-600 hover:text-tamak-green py-1">7. Your Rights (NDPR)</a>
+                        <a href="#cookies" class="block text-sm text-gray-600 hover:text-tamak-green py-1">8. Cookies & Tracking</a>
+                        <a href="#children" class="block text-sm text-gray-600 hover:text-tamak-green py-1">9. Children's Privacy</a>
+                        <a href="#international" class="block text-sm text-gray-600 hover:text-tamak-green py-1">10. International Transfers</a>
+                        <a href="#updates" class="block text-sm text-gray-600 hover:text-tamak-green py-1">11. Policy Updates</a>
+                        <a href="#contact" class="block text-sm text-gray-600 hover:text-tamak-green py-1">12. Contact & DPO</a>
+                    </div>
+                </div>
+
+                <!-- Privacy Content -->
+                <div class="prose prose-lg max-w-none">
+                    
+                    <!-- 1. Policy Overview -->
+                    <section id="overview" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">1</span>
+                            Privacy Policy Overview
+                        </h2>
+                        
+                        <div class="bg-gradient-to-r from-blue-50 to-green-50 border-l-4 border-blue-400 p-6 mb-6 rounded-r-lg">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-3">Our Commitment to Your Privacy</h3>
+                            <p class="text-blue-800 mb-4">
+                                Tamaktech Nigeria Limited is committed to protecting and respecting your privacy. This Privacy Policy explains how we collect, use, share, and protect your personal information when you use our services, visit our website, or engage with our electrical equipment and installation services.
+                            </p>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="text-center">
+                                    <div class="bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <h4 class="font-semibold text-blue-900 text-sm">NDPR Compliant</h4>
+                                    <p class="text-xs text-blue-700">Nigerian Data Protection</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <h4 class="font-semibold text-green-900 text-sm">Secure Processing</h4>
+                                    <p class="text-xs text-green-700">Encrypted & Protected</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-purple-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <h4 class="font-semibold text-purple-900 text-sm">Transparent</h4>
+                                    <p class="text-xs text-purple-700">Clear Communication</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Scope of This Policy</h3>
+                        <p class="text-gray-700 mb-4">
+                            This Privacy Policy applies to all personal information collected by Tamaktech Nigeria Limited through our website, mobile applications, in-store interactions, customer service communications, and all our electrical equipment sales and installation services.
+                        </p>
+
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold text-yellow-900 mb-2">Important Notice</h4>
+                            <p class="text-yellow-800 text-sm">
+                                By using our services, visiting our website, or providing us with your personal information, you consent to the collection, use, and disclosure of your information in accordance with this Privacy Policy and applicable Nigerian laws.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- 2. Information We Collect -->
+                    <section id="information" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">2</span>
+                            Information We Collect
+                        </h2>
+
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-blue-500 text-white rounded-full p-2 mr-3">
+                                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-blue-900">Personal Information</h3>
+                                </div>
+                                <ul class="text-blue-800 space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2">•</span>
+                                        Full name and contact details
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2">•</span>
+                                        Email address and phone number
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2">•</span>
+                                        Physical and billing addresses
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2">•</span>
+                                        Identity verification documents
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2">•</span>
+                                        Company information (for businesses)
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-green-500 text-white rounded-full p-2 mr-3">
+                                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-green-900">Transaction Data</h3>
+                                </div>
+                                <ul class="text-green-800 space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="text-green-500 mr-2">•</span>
+                                        Purchase history and orders
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green-500 mr-2">•</span>
+                                        Payment information (securely processed)
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green-500 mr-2">•</span>
+                                        Service requests and installations
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green-500 mr-2">•</span>
+                                        Warranty and support records
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green-500 mr-2">•</span>
+                                        Product preferences and specifications
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border border-purple-200">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-purple-500 text-white rounded-full p-2 mr-3">
+                                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-purple-900">Technical Data</h3>
+                                </div>
+                                <ul class="text-purple-800 space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="text-purple-500 mr-2">•</span>
+                                        Website usage and analytics
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-purple-500 mr-2">•</span>
+                                        Device information and IP address
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-purple-500 mr-2">•</span>
+                                        Browser type and preferences
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-purple-500 mr-2">•</span>
+                                        Location data (with consent)
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-purple-500 mr-2">•</span>
+                                        Cookies and tracking technologies
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">How We Collect Information</h3>
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                                        <svg class="h-5 w-5 text-tamak-green mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Direct Collection
+                                    </h4>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Account registration forms</li>
+                                        <li>• Purchase and service orders</li>
+                                        <li>• Customer service interactions</li>
+                                        <li>• Installation consultations</li>
+                                        <li>• Warranty registrations</li>
+                                        <li>• Newsletter subscriptions</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                                        <svg class="h-5 w-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Automatic Collection
+                                    </h4>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Website visit tracking</li>
+                                        <li>• Mobile app usage analytics</li>
+                                        <li>• Email interaction metrics</li>
+                                        <li>• Social media engagement</li>
+                                        <li>• Location services (with permission)</li>
+                                        <li>• Device and browser information</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 3. How We Use Data -->
+                    <section id="usage" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">3</span>
+                            How We Use Your Data
+                        </h2>
+
+                        <div class="mb-6">
+                            <div class="bg-gradient-to-r from-tamak-green to-tamak-yellow bg-opacity-10 border border-tamak-green rounded-xl p-6">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Legal Basis for Processing (NDPR Compliance)</h3>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-semibold text-tamak-green mb-2">Legitimate Interests</h4>
+                                        <ul class="text-gray-700 text-sm space-y-1">
+                                            <li>• Providing electrical equipment and services</li>
+                                            <li>• Processing orders and payments</li>
+                                            <li>• Customer support and warranty services</li>
+                                            <li>• Business operations and administration</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-tamak-green mb-2">Consent</h4>
+                                        <ul class="text-gray-700 text-sm space-y-1">
+                                            <li>• Marketing communications</li>
+                                            <li>• Newsletter subscriptions</li>
+                                            <li>• Location tracking</li>
+                                            <li>• Optional analytics and personalization</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Primary Uses of Your Information</h3>
+                        <div class="space-y-6">
+                            <div class="border border-gray-200 rounded-lg p-6">
+                                <h4 class="font-semibold text-blue-900 mb-3 flex items-center">
+                                    <svg class="h-6 w-6 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/>
+                                    </svg>
+                                    Service Delivery & Operations
+                                </h4>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Processing your orders for electrical equipment</li>
+                                        <li>• Scheduling and performing installations</li>
+                                        <li>• Providing technical support and maintenance</li>
+                                        <li>• Managing warranty claims and repairs</li>
+                                    </ul>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Delivery coordination and logistics</li>
+                                        <li>• Payment processing and invoicing</li>
+                                        <li>• Account management and customer records</li>
+                                        <li>• Quality assurance and service improvement</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-lg p-6">
+                                <h4 class="font-semibold text-green-900 mb-3 flex items-center">
+                                    <svg class="h-6 w-6 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Communication & Support
+                                </h4>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Responding to inquiries and requests</li>
+                                        <li>• Sending service updates and notifications</li>
+                                        <li>• Providing technical guidance and consultations</li>
+                                        <li>• Emergency support for generator and electrical issues</li>
+                                    </ul>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Order confirmations and delivery updates</li>
+                                        <li>• Warranty reminders and maintenance alerts</li>
+                                        <li>• Safety notifications and product recalls</li>
+                                        <li>• Customer satisfaction surveys</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-lg p-6">
+                                <h4 class="font-semibold text-purple-900 mb-3 flex items-center">
+                                    <svg class="h-6 w-6 text-purple-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Business Improvement & Analytics
+                                </h4>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Website performance optimization</li>
+                                        <li>• Product demand analysis and inventory management</li>
+                                        <li>• Service quality monitoring and improvement</li>
+                                        <li>• Customer behavior analysis for better experiences</li>
+                                    </ul>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Fraud prevention and security monitoring</li>
+                                        <li>• Market research and business planning</li>
+                                        <li>• Training and development of our technical staff</li>
+                                        <li>• Compliance with electrical safety regulations</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 4. Data Sharing -->
+                    <section id="sharing" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">4</span>
+                            Data Sharing & Disclosure
+                        </h2>
+
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-6 mb-6">
+                            <h3 class="text-lg font-semibold text-red-900 mb-2 flex items-center">
+                                <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                                We Do NOT Sell Your Personal Data
+                            </h3>
+                            <p class="text-red-800">
+                                Tamaktech does not sell, rent, or trade your personal information to third parties for commercial purposes. Your trust is fundamental to our business relationship.
+                            </p>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">When We May Share Information</h3>
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                                <h4 class="font-semibold text-blue-900 mb-2">Service Providers & Partners</h4>
+                                <p class="text-blue-800 text-sm mb-2">We may share information with trusted partners who help us provide our services:</p>
+                                <ul class="text-blue-700 text-sm space-y-1 ml-4">
+                                    <li>• Payment processors (for secure payment handling)</li>
+                                    <li>• Delivery and logistics companies</li>
+                                    <li>• Installation contractors and certified technicians</li>
+                                    <li>• Equipment manufacturers (for warranty claims)</li>
+                                    <li>• Cloud hosting and IT service providers</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
+                                <h4 class="font-semibold text-green-900 mb-2">Legal Requirements</h4>
+                                <p class="text-green-800 text-sm mb-2">We may disclose information when required by Nigerian law or regulation:</p>
+                                <ul class="text-green-700 text-sm space-y-1 ml-4">
+                                    <li>• Compliance with court orders or legal processes</li>
+                                    <li>• Cooperation with law enforcement investigations</li>
+                                    <li>• Meeting regulatory requirements for electrical installations</li>
+                                    <li>• Protecting our rights, property, or safety</li>
+                                    <li>• Emergency situations to prevent harm</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                                <h4 class="font-semibold text-yellow-900 mb-2">Business Transfers</h4>
+                                <p class="text-yellow-800 text-sm mb-2">In the unlikely event of business reorganization:</p>
+                                <ul class="text-yellow-700 text-sm space-y-1 ml-4">
+                                    <li>• Merger, acquisition, or sale of business assets</li>
+                                    <li>• Bankruptcy or insolvency proceedings</li>
+                                    <li>• Corporate restructuring or reorganization</li>
+                                    <li>• Customer data may be transferred to the new entity</li>
+                                    <li>• You will be notified of any such transfer</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-100 rounded-lg p-6 mt-6">
+                            <h4 class="font-semibold text-gray-900 mb-3">Data Protection Safeguards</h4>
+                            <p class="text-gray-700 text-sm mb-3">
+                                When we share information with third parties, we ensure:
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <ul class="text-gray-600 text-sm space-y-1">
+                                    <li>✓ Contractual data protection obligations</li>
+                                    <li>✓ Minimum necessary information sharing</li>
+                                    <li>✓ Purpose limitation and usage restrictions</li>
+                                </ul>
+                                <ul class="text-gray-600 text-sm space-y-1">
+                                    <li>✓ Security requirements and audits</li>
+                                    <li>✓ Data retention and deletion policies</li>
+                                    <li>✓ Regular compliance monitoring</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 5. Data Security -->
+                    <section id="security" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">5</span>
+                            Data Security Measures
+                        </h2>
+
+                        <div class="bg-gradient-to-br from-green-500 to-blue-500 text-white rounded-xl p-8 mb-8">
+                            <div class="text-center">
+                                <div class="bg-white bg-opacity-20 rounded-full p-4 inline-block mb-4">
+                                    <svg class="h-12 w-12" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-3">Enterprise-Grade Security</h3>
+                                <p class="text-lg opacity-90">
+                                    We implement multiple layers of security to protect your personal information from unauthorized access, use, or disclosure.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-white border border-blue-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-blue-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Encryption</h4>
+                                <p class="text-gray-600 text-sm">
+                                    All data transmission uses SSL/TLS encryption. Sensitive data is encrypted at rest using industry-standard algorithms.
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-green-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-green-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Access Controls</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Role-based access controls ensure only authorized personnel can access customer data on a need-to-know basis.
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-purple-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-purple-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Regular Audits</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Regular security audits, penetration testing, and vulnerability assessments ensure our defenses remain strong.
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-red-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-red-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Incident Response</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Comprehensive incident response plan with immediate notification procedures for any potential data breaches.
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-yellow-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-yellow-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Staff Training</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Regular training programs ensure all staff understand data protection obligations and security best practices.
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-indigo-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-indigo-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Monitoring</h4>
+                                <p class="text-gray-600 text-sm">
+                                    24/7 monitoring systems detect and alert us to any suspicious activity or unauthorized access attempts.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+                            <h4 class="font-semibold text-orange-900 mb-2 flex items-center">
+                                <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                </svg>
+                                Your Role in Data Security
+                            </h4>
+                            <p class="text-orange-800 text-sm mb-3">
+                                While we implement strong security measures, you can help protect your information by:
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <ul class="text-orange-700 text-sm space-y-1">
+                                    <li>• Using strong, unique passwords</li>
+                                    <li>• Keeping login credentials confidential</li>
+                                    <li>• Logging out from shared devices</li>
+                                </ul>
+                                <ul class="text-orange-700 text-sm space-y-1">
+                                    <li>• Reporting suspicious activities</li>
+                                    <li>• Keeping contact information updated</li>
+                                    <li>• Being cautious with public Wi-Fi</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Continue with remaining sections... -->
+                    <!-- 6. Data Retention -->
+                    <section id="retention" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">6</span>
+                            Data Retention Policy
+                        </h2>
+                        
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-3">Retention Principle</h3>
+                            <p class="text-blue-800">
+                                We retain your personal information only for as long as necessary to fulfill the purposes for which it was collected, comply with legal obligations, resolve disputes, and enforce our agreements.
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                    <h4 class="font-semibold text-green-900 mb-2">Customer Account Data</h4>
+                                    <p class="text-green-700 text-sm mb-2"><strong>Retention:</strong> Active accounts + 3 years after closure</p>
+                                    <p class="text-green-600 text-xs">Includes contact info, purchase history, preferences</p>
+                                </div>
+                                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                                    <h4 class="font-semibold text-purple-900 mb-2">Transaction Records</h4>
+                                    <p class="text>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                                    <h4 class="font-semibold text-purple-900 mb-2">Transaction Records</h4>
+                                    <p class="text-purple-700 text-sm mb-2"><strong>Retention:</strong> 7 years (Nigerian tax law)</p>
+                                    <p class="text-purple-600 text-xs">Payment records, invoices, warranties</p>
+                                </div>
+                                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                                    <h4 class="font-semibold text-orange-900 mb-2">Technical Support Data</h4>
+                                    <p class="text-orange-700 text-sm mb-2"><strong>Retention:</strong> 2 years after case closure</p>
+                                    <p class="text-orange-600 text-xs">Support tickets, installation records, service history</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                    <h4 class="font-semibold text-blue-900 mb-2">Marketing Communications</h4>
+                                    <p class="text-blue-700 text-sm mb-2"><strong>Retention:</strong> Until unsubscription + 30 days</p>
+                                    <p class="text-blue-600 text-xs">Newsletter, promotional emails, preferences</p>
+                                </div>
+                                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                                    <h4 class="font-semibold text-gray-900 mb-2">Website Analytics</h4>
+                                    <p class="text-gray-700 text-sm mb-2"><strong>Retention:</strong> 14 months (Google Analytics)</p>
+                                    <p class="text-gray-600 text-xs">Anonymous usage data, performance metrics</p>
+                                </div>
+                                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                                    <h4 class="font-semibold text-red-900 mb-2">Security Logs</h4>
+                                    <p class="text-red-700 text-sm mb-2"><strong>Retention:</strong> 12 months</p>
+                                    <p class="text-red-600 text-xs">Access logs, security incidents, audit trails</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 7. Your Rights (NDPR) -->
+                    <section id="rights" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">7</span>
+                            Your Rights Under NDPR
+                        </h2>
+
+                        <div class="bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-xl p-8 mb-8">
+                            <div class="text-center">
+                                <h3 class="text-2xl font-bold mb-3">You Have Control Over Your Data</h3>
+                                <p class="text-lg opacity-90 max-w-2xl mx-auto">
+                                    The Nigeria Data Protection Regulation (NDPR) gives you specific rights regarding your personal information. We respect and facilitate these rights.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-6">
+                                <div class="bg-white border border-blue-200 rounded-lg p-6 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="bg-blue-100 rounded-full p-2 mr-4 mt-1">
+                                            <svg class="h-5 w-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-2">Right of Access</h4>
+                                            <p class="text-gray-600 text-sm mb-2">
+                                                Request a copy of all personal information we hold about you, including how it's being used.
+                                            </p>
+                                            <p class="text-blue-600 text-xs font-medium">Response time: 30 days</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white border border-green-200 rounded-lg p-6 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="bg-green-100 rounded-full p-2 mr-4 mt-1">
+                                            <svg class="h-5 w-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-2">Right to Rectification</h4>
+                                            <p class="text-gray-600 text-sm mb-2">
+                                                Correct any inaccurate or incomplete personal information we hold about you.
+                                            </p>
+                                            <p class="text-green-600 text-xs font-medium">Response time: 15 days</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white border border-red-200 rounded-lg p-6 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="bg-red-100 rounded-full p-2 mr-4 mt-1">
+                                            <svg class="h-5 w-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 2a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-2">Right to Erasure</h4>
+                                            <p class="text-gray-600 text-sm mb-2">
+                                                Request deletion of your personal data when there's no legitimate reason for continued processing.
+                                            </p>
+                                            <p class="text-red-600 text-xs font-medium">Response time: 30 days</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white border border-purple-200 rounded-lg p-6 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="bg-purple-100 rounded-full p-2 mr-4 mt-1">
+                                            <svg class="h-5 w-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-2">Right to Data Portability</h4>
+                                            <p class="text-gray-600 text-sm mb-2">
+                                                Receive your personal data in a structured, machine-readable format for transfer to another service.
+                                            </p>
+                                            <p class="text-purple-600 text-xs font-medium">Response time: 30 days</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="bg-white border border-yellow-200 rounded-lg p-6 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="bg-yellow-100 rounded-full p-2 mr-4 mt-1">
+                                            <svg class="h-5 w-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-2">Right to Object</h4>
+                                            <p class="text-gray-600 text-sm mb-2">
+                                                Object to processing of your personal data for direct marketing or other legitimate interests.
+                                            </p>
+                                            <p class="text-yellow-600 text-xs font-medium">Response time: Immediate for marketing</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white border border-indigo-200 rounded-lg p-6 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="bg-indigo-100 rounded-full p-2 mr-4 mt-1">
+                                            <svg class="h-5 w-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm2 2a1 1 0 000 2h.01a1 1 0 100-2H6zm3 0a1 1 0 000 2h3a1 1 0 100-2H9z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-2">Right to Restrict Processing</h4>
+                                            <p class="text-gray-600 text-sm mb-2">
+                                                Limit how we use your personal data while we address concerns about accuracy or lawfulness.
+                                            </p>
+                                            <p class="text-indigo-600 text-xs font-medium">Response time: 15 days</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white border border-teal-200 rounded-lg p-6 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="bg-teal-100 rounded-full p-2 mr-4 mt-1">
+                                            <svg class="h-5 w-5 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-2">Right to Withdraw Consent</h4>
+                                            <p class="text-gray-600 text-sm mb-2">
+                                                Withdraw your consent for data processing at any time where consent is the legal basis.
+                                            </p>
+                                            <p class="text-teal-600 text-xs font-medium">Response time: Immediate</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="bg-gray-100 rounded-full p-2 mr-4 mt-1">
+                                            <svg class="h-5 w-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 13H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-2">Right to Lodge a Complaint</h4>
+                                            <p class="text-gray-600 text-sm mb-2">
+                                                File a complaint with the Nigeria Data Protection Commission if you believe your rights have been violated.
+                                            </p>
+                                            <p class="text-gray-600 text-xs font-medium">Contact: NDPC directly</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-tamak-green bg-opacity-10 border border-tamak-green rounded-lg p-6 mt-8">
+                            <h4 class="font-semibold text-tamak-green mb-3 flex items-center">
+                                <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                </svg>
+                                How to Exercise Your Rights
+                            </h4>
+                            <p class="text-gray-700 text-sm mb-4">
+                                To exercise any of these rights, contact our Data Protection Officer using the contact information provided at the end of this policy. We may need to verify your identity before processing your request.
+                            </p>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="text-center">
+                                    <div class="bg-tamak-green text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2">
+                                        <span class="text-sm font-bold">1</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600">Submit written request</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-tamak-green text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2">
+                                        <span class="text-sm font-bold">2</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600">Verify your identity</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-tamak-green text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2">
+                                        <span class="text-sm font-bold">3</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600">Receive response</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 8. Cookies & Tracking -->
+                    <section id="cookies" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">8</span>
+                            Cookies & Tracking Technologies
+                        </h2>
+
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-6">
+                            <h3 class="text-lg font-semibold text-yellow-900 mb-2">What Are Cookies?</h3>
+                            <p class="text-yellow-800 text-sm">
+                                Cookies are small text files stored on your device when you visit our website. They help us provide you with a better user experience by remembering your preferences and analyzing website usage.
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                                <div class="bg-green-500 text-white rounded-full p-3 inline-block mb-3">
+                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-green-900 mb-2">Essential Cookies</h4>
+                                <p class="text-green-700 text-sm">Required for website functionality and security</p>
+                            </div>
+
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+                                <div class="bg-blue-500 text-white rounded-full p-3 inline-block mb-3">
+                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-blue-900 mb-2">Performance Cookies</h4>
+                                <p class="text-blue-700 text-sm">Help us understand website usage and performance</p>
+                            </div>
+
+                            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 text-center">
+                                <div class="bg-purple-500 text-white rounded-full p-3 inline-block mb-3">
+                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-purple-900 mb-2">Functionality Cookies</h4>
+                                <p class="text-purple-700 text-sm">Remember your preferences and settings</p>
+                            </div>
+
+                            <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center">
+                                <div class="bg-orange-500 text-white rounded-full p-3 inline-block mb-3">
+                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-orange-900 mb-2">Targeting Cookies</h4>
+                                <p class="text-orange-700 text-sm">Deliver relevant advertisements (with consent)</p>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Cookie Management</h3>
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-3">Your Cookie Choices</h4>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li class="flex items-start">
+                                            <span class="text-tamak-green mr-2">•</span>
+                                            Accept all cookies for the best experience
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-tamak-green mr-2">•</span>
+                                            Customize your cookie preferences
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-tamak-green mr-2">•</span>
+                                            Block non-essential cookies in browser settings
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-tamak-green mr-2">•</span>
+                                            Clear existing cookies at any time
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-3">Third-Party Cookies</h4>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li class="flex items-start">
+                                            <span class="text-blue-500 mr-2">•</span>
+                                            Google Analytics (website performance)
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-blue-500 mr-2">•</span>
+                                            Facebook Pixel (advertising optimization)
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-blue-500 mr-2">•</span>
+                                            Payment processors (transaction security)
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-blue-500 mr-2">•</span>
+                                            Customer support chat tools
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 9-12. Remaining sections (condensed for space) -->
+                    <section id="children" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">9</span>
+                            Children's Privacy
+                        </h2>
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                            <p class="text-red-800">
+                                <strong>Age Restriction:</strong> Our services are not intended for children under 18. We do not knowingly collect personal information from minors. If you believe we have collected information from a child, please contact us immediately.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section id="international" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">10</span>
+                            International Data Transfers
+                        </h2>
+                        <p class="text-gray-700 mb-4">
+                            Your data is primarily processed within Nigeria. When international transfers are necessary (e.g., cloud services), we ensure appropriate safeguards including encryption, contractual protections, and compliance with NDPR requirements.
+                        </p>
+                    </section>
+
+                    <section id="updates" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy - Tamaktech Nigeria | Data Protection & NDPR Compliance{% endblock %}
+
+{% block extra_css %}
+<meta name="description" content="Tamaktech Nigeria's comprehensive privacy policy covering data protection, NDPR compliance, customer information security, and your rights regarding personal data.">
+<meta name="keywords" content="Tamaktech privacy policy, NDPR compliance, data protection Nigeria, customer privacy, electrical equipment data security">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph Tags -->
+<meta property="og:title" content="Privacy Policy - Tamaktech Nigeria">
+<meta property="og:description" content="Learn how Tamaktech protects your personal data and complies with Nigerian Data Protection Regulation (NDPR).">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{% url 'pages:privacy' %}">
+<meta property="og:image" content="{% static 'images/tamaktech-privacy-og.jpg' %}">
+
+<!-- Twitter Card Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy - Tamaktech Nigeria">
+<meta name="twitter:description" content="Comprehensive privacy policy and data protection information for Tamaktech customers.">
+
+<!-- Schema.org structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PrivacyPolicy",
+  "name": "Tamaktech Privacy Policy",
+  "description": "Privacy policy for Tamaktech Nigeria electrical equipment and services",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Tamaktech Nigeria Limited",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{% static 'images/tamaktech-logo.png' %}"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Nigeria",
+      "addressLocality": "Lagos"
+    }
+  },
+  "datePublished": "2024-01-01",
+  "dateModified": "{{ current_date|date:'Y-m-d' }}",
+  "inLanguage": "en-NG"
+}
+</script>
+
+<style>
+.privacy-section {
+    scroll-margin-top: 100px;
+}
+
+.privacy-nav {
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.privacy-nav::-webkit-scrollbar {
+    width: 4px;
+}
+
+.privacy-nav::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 2px;
+}
+
+.privacy-nav::-webkit-scrollbar-thumb {
+    background: #16a34a;
+    border-radius: 2px;
+}
+
+.data-flow-animation {
+    animation: dataFlow 3s ease-in-out infinite;
+}
+
+@keyframes dataFlow {
+    0%, 100% { transform: translateX(0); opacity: 0.7; }
+    50% { transform: translateX(10px); opacity: 1; }
+}
+
+.shield-icon {
+    animation: shield-pulse 2s ease-in-out infinite;
+}
+
+@keyframes shield-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@media (max-width: 1024px) {
+    .privacy-nav {
+        position: static;
+        max-height: none;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav class="bg-gray-50 py-4" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ol class="flex items-center space-x-2 text-sm">
+            <li><a href="{% url 'pages:home' %}" class="text-gray-500 hover:text-tamak-green transition-colors">Home</a></li>
+            <li><span class="text-gray-400">/</span></li>
+            <li><span class="text-gray-900 font-medium">Privacy Policy</span></li>
+        </ol>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="bg-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:grid lg:grid-cols-4 lg:gap-8">
+            
+            <!-- Table of Contents (Desktop Sidebar) -->
+            <div class="hidden lg:block">
+                <div class="privacy-nav bg-gradient-to-br from-blue-50 to-green-50 rounded-xl p-6 border border-blue-100">
+                    <div class="flex items-center mb-4">
+                        <div class="shield-icon bg-blue-500 text-white rounded-full p-2 mr-3">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Privacy Navigation</h3>
+                    </div>
+                    <nav class="space-y-2">
+                        <a href="#overview" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">1. Policy Overview</a>
+                        <a href="#information" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">2. Information We Collect</a>
+                        <a href="#usage" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">3. How We Use Data</a>
+                        <a href="#sharing" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">4. Data Sharing</a>
+                        <a href="#security" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">5. Data Security</a>
+                        <a href="#retention" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">6. Data Retention</a>
+                        <a href="#rights" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">7. Your Rights (NDPR)</a>
+                        <a href="#cookies" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">8. Cookies & Tracking</a>
+                        <a href="#children" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">9. Children's Privacy</a>
+                        <a href="#international" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">10. International Transfers</a>
+                        <a href="#updates" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">11. Policy Updates</a>
+                        <a href="#contact" class="block text-sm text-gray-600 hover:text-tamak-green transition-colors py-1 px-2 rounded hover:bg-white">12. Contact & DPO</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="lg:col-span-3">
+                <!-- Header -->
+                <div class="text-center mb-12">
+                    <div class="flex justify-center mb-6">
+                        <div class="bg-gradient-to-br from-blue-500 to-green-500 p-4 rounded-2xl shadow-lg">
+                            <svg class="h-12 w-12 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h1 class="text-4xl font-bold text-gray-900 mb-4">Privacy Policy</h1>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+                        Your privacy is important to us. This policy explains how Tamaktech Nigeria Limited collects, uses, and protects your personal information in compliance with Nigerian Data Protection Regulation (NDPR).
+                    </p>
+                    
+                    <!-- NDPR Compliance Badge -->
+                    <div class="bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-xl p-6 max-w-2xl mx-auto">
+                        <div class="flex items-center justify-center mb-3">
+                            <svg class="h-8 w-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <h3 class="text-lg font-bold">NDPR Compliant</h3>
+                        </div>
+                        <p class="text-sm opacity-90">
+                            This privacy policy is fully compliant with the Nigeria Data Protection Regulation (NDPR) and international best practices for data protection.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <p class="text-sm text-gray-700">
+                            <strong>Last Updated:</strong> January 1, 2025 | 
+                            <strong>Effective Date:</strong> January 1, 2025 |
+                            <strong>Version:</strong> 3.0
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Mobile Table of Contents -->
+                <div class="lg:hidden mb-8" x-data="{ open: false }">
+                    <button @click="open = !open" class="w-full bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-4 flex items-center justify-between">
+                        <span class="font-medium text-gray-900 flex items-center">
+                            <svg class="h-5 w-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            Privacy Policy Navigation
+                        </span>
+                        <svg class="h-5 w-5 transform transition-transform" :class="{'rotate-180': open}" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-collapse class="mt-2 bg-gray-50 rounded-lg p-4 space-y-2 border border-gray-200">
+                        <a href="#overview" class="block text-sm text-gray-600 hover:text-tamak-green py-1">1. Policy Overview</a>
+                        <a href="#information" class="block text-sm text-gray-600 hover:text-tamak-green py-1">2. Information We Collect</a>
+                        <a href="#usage" class="block text-sm text-gray-600 hover:text-tamak-green py-1">3. How We Use Data</a>
+                        <a href="#sharing" class="block text-sm text-gray-600 hover:text-tamak-green py-1">4. Data Sharing</a>
+                        <a href="#security" class="block text-sm text-gray-600 hover:text-tamak-green py-1">5. Data Security</a>
+                        <a href="#retention" class="block text-sm text-gray-600 hover:text-tamak-green py-1">6. Data Retention</a>
+                        <a href="#rights" class="block text-sm text-gray-600 hover:text-tamak-green py-1">7. Your Rights (NDPR)</a>
+                        <a href="#cookies" class="block text-sm text-gray-600 hover:text-tamak-green py-1">8. Cookies & Tracking</a>
+                        <a href="#children" class="block text-sm text-gray-600 hover:text-tamak-green py-1">9. Children's Privacy</a>
+                        <a href="#international" class="block text-sm text-gray-600 hover:text-tamak-green py-1">10. International Transfers</a>
+                        <a href="#updates" class="block text-sm text-gray-600 hover:text-tamak-green py-1">11. Policy Updates</a>
+                        <a href="#contact" class="block text-sm text-gray-600 hover:text-tamak-green py-1">12. Contact & DPO</a>
+                    </div>
+                </div>
+
+                <!-- Privacy Content -->
+                <div class="prose prose-lg max-w-none">
+                    
+                    <!-- 1. Policy Overview -->
+                    <section id="overview" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">1</span>
+                            Privacy Policy Overview
+                        </h2>
+                        
+                        <div class="bg-gradient-to-r from-blue-50 to-green-50 border-l-4 border-blue-400 p-6 mb-6 rounded-r-lg">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-3">Our Commitment to Your Privacy</h3>
+                            <p class="text-blue-800 mb-4">
+                                Tamaktech Nigeria Limited is committed to protecting and respecting your privacy. This Privacy Policy explains how we collect, use, share, and protect your personal information when you use our services, visit our website, or engage with our electrical equipment and installation services.
+                            </p>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="text-center">
+                                    <div class="bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <h4 class="font-semibold text-blue-900 text-sm">NDPR Compliant</h4>
+                                    <p class="text-xs text-blue-700">Nigerian Data Protection</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <h4 class="font-semibold text-green-900 text-sm">Secure Processing</h4>
+                                    <p class="text-xs text-green-700">Encrypted & Protected</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-purple-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <h4 class="font-semibold text-purple-900 text-sm">Transparent</h4>
+                                    <p class="text-xs text-purple-700">Clear Communication</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Scope of This Policy</h3>
+                        <p class="text-gray-700 mb-4">
+                            This Privacy Policy applies to all personal information collected by Tamaktech Nigeria Limited through our website, mobile applications, in-store interactions, customer service communications, and all our electrical equipment sales and installation services.
+                        </p>
+
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold text-yellow-900 mb-2">Important Notice</h4>
+                            <p class="text-yellow-800 text-sm">
+                                By using our services, visiting our website, or providing us with your personal information, you consent to the collection, use, and disclosure of your information in accordance with this Privacy Policy and applicable Nigerian laws.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- 2. Information We Collect -->
+                    <section id="information" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">2</span>
+                            Information We Collect
+                        </h2>
+
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-blue-500 text-white rounded-full p-2 mr-3">
+                                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-blue-900">Personal Information</h3>
+                                </div>
+                                <ul class="text-blue-800 space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2">•</span>
+                                        Full name and contact details
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2">•</span>
+                                        Email address and phone number
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2">•</span>
+                                        Physical and billing addresses
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2">•</span>
+                                        Identity verification documents
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2">•</span>
+                                        Company information (for businesses)
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-green-500 text-white rounded-full p-2 mr-3">
+                                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-green-900">Transaction Data</h3>
+                                </div>
+                                <ul class="text-green-800 space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="text-green-500 mr-2">•</span>
+                                        Purchase history and orders
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green-500 mr-2">•</span>
+                                        Payment information (securely processed)
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green-500 mr-2">•</span>
+                                        Service requests and installations
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green-500 mr-2">•</span>
+                                        Warranty and support records
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green-500 mr-2">•</span>
+                                        Product preferences and specifications
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border border-purple-200">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-purple-500 text-white rounded-full p-2 mr-3">
+                                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-purple-900">Technical Data</h3>
+                                </div>
+                                <ul class="text-purple-800 space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="text-purple-500 mr-2">•</span>
+                                        Website usage and analytics
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-purple-500 mr-2">•</span>
+                                        Device information and IP address
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-purple-500 mr-2">•</span>
+                                        Browser type and preferences
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-purple-500 mr-2">•</span>
+                                        Location data (with consent)
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-purple-500 mr-2">•</span>
+                                        Cookies and tracking technologies
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">How We Collect Information</h3>
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                                        <svg class="h-5 w-5 text-tamak-green mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Direct Collection
+                                    </h4>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Account registration forms</li>
+                                        <li>• Purchase and service orders</li>
+                                        <li>• Customer service interactions</li>
+                                        <li>• Installation consultations</li>
+                                        <li>• Warranty registrations</li>
+                                        <li>• Newsletter subscriptions</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                                        <svg class="h-5 w-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Automatic Collection
+                                    </h4>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Website visit tracking</li>
+                                        <li>• Mobile app usage analytics</li>
+                                        <li>• Email interaction metrics</li>
+                                        <li>• Social media engagement</li>
+                                        <li>• Location services (with permission)</li>
+                                        <li>• Device and browser information</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 3. How We Use Data -->
+                    <section id="usage" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">3</span>
+                            How We Use Your Data
+                        </h2>
+
+                        <div class="mb-6">
+                            <div class="bg-gradient-to-r from-tamak-green to-tamak-yellow bg-opacity-10 border border-tamak-green rounded-xl p-6">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Legal Basis for Processing (NDPR Compliance)</h3>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-semibold text-tamak-green mb-2">Legitimate Interests</h4>
+                                        <ul class="text-gray-700 text-sm space-y-1">
+                                            <li>• Providing electrical equipment and services</li>
+                                            <li>• Processing orders and payments</li>
+                                            <li>• Customer support and warranty services</li>
+                                            <li>• Business operations and administration</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-tamak-green mb-2">Consent</h4>
+                                        <ul class="text-gray-700 text-sm space-y-1">
+                                            <li>• Marketing communications</li>
+                                            <li>• Newsletter subscriptions</li>
+                                            <li>• Location tracking</li>
+                                            <li>• Optional analytics and personalization</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Primary Uses of Your Information</h3>
+                        <div class="space-y-6">
+                            <div class="border border-gray-200 rounded-lg p-6">
+                                <h4 class="font-semibold text-blue-900 mb-3 flex items-center">
+                                    <svg class="h-6 w-6 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/>
+                                    </svg>
+                                    Service Delivery & Operations
+                                </h4>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Processing your orders for electrical equipment</li>
+                                        <li>• Scheduling and performing installations</li>
+                                        <li>• Providing technical support and maintenance</li>
+                                        <li>• Managing warranty claims and repairs</li>
+                                    </ul>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Delivery coordination and logistics</li>
+                                        <li>• Payment processing and invoicing</li>
+                                        <li>• Account management and customer records</li>
+                                        <li>• Quality assurance and service improvement</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-lg p-6">
+                                <h4 class="font-semibold text-green-900 mb-3 flex items-center">
+                                    <svg class="h-6 w-6 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Communication & Support
+                                </h4>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Responding to inquiries and requests</li>
+                                        <li>• Sending service updates and notifications</li>
+                                        <li>• Providing technical guidance and consultations</li>
+                                        <li>• Emergency support for generator and electrical issues</li>
+                                    </ul>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Order confirmations and delivery updates</li>
+                                        <li>• Warranty reminders and maintenance alerts</li>
+                                        <li>• Safety notifications and product recalls</li>
+                                        <li>• Customer satisfaction surveys</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-lg p-6">
+                                <h4 class="font-semibold text-purple-900 mb-3 flex items-center">
+                                    <svg class="h-6 w-6 text-purple-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Business Improvement & Analytics
+                                </h4>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Website performance optimization</li>
+                                        <li>• Product demand analysis and inventory management</li>
+                                        <li>• Service quality monitoring and improvement</li>
+                                        <li>• Customer behavior analysis for better experiences</li>
+                                    </ul>
+                                    <ul class="text-gray-700 space-y-2 text-sm">
+                                        <li>• Fraud prevention and security monitoring</li>
+                                        <li>• Market research and business planning</li>
+                                        <li>• Training and development of our technical staff</li>
+                                        <li>• Compliance with electrical safety regulations</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 4. Data Sharing -->
+                    <section id="sharing" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">4</span>
+                            Data Sharing & Disclosure
+                        </h2>
+
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-6 mb-6">
+                            <h3 class="text-lg font-semibold text-red-900 mb-2 flex items-center">
+                                <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                                We Do NOT Sell Your Personal Data
+                            </h3>
+                            <p class="text-red-800">
+                                Tamaktech does not sell, rent, or trade your personal information to third parties for commercial purposes. Your trust is fundamental to our business relationship.
+                            </p>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">When We May Share Information</h3>
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                                <h4 class="font-semibold text-blue-900 mb-2">Service Providers & Partners</h4>
+                                <p class="text-blue-800 text-sm mb-2">We may share information with trusted partners who help us provide our services:</p>
+                                <ul class="text-blue-700 text-sm space-y-1 ml-4">
+                                    <li>• Payment processors (for secure payment handling)</li>
+                                    <li>• Delivery and logistics companies</li>
+                                    <li>• Installation contractors and certified technicians</li>
+                                    <li>• Equipment manufacturers (for warranty claims)</li>
+                                    <li>• Cloud hosting and IT service providers</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
+                                <h4 class="font-semibold text-green-900 mb-2">Legal Requirements</h4>
+                                <p class="text-green-800 text-sm mb-2">We may disclose information when required by Nigerian law or regulation:</p>
+                                <ul class="text-green-700 text-sm space-y-1 ml-4">
+                                    <li>• Compliance with court orders or legal processes</li>
+                                    <li>• Cooperation with law enforcement investigations</li>
+                                    <li>• Meeting regulatory requirements for electrical installations</li>
+                                    <li>• Protecting our rights, property, or safety</li>
+                                    <li>• Emergency situations to prevent harm</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                                <h4 class="font-semibold text-yellow-900 mb-2">Business Transfers</h4>
+                                <p class="text-yellow-800 text-sm mb-2">In the unlikely event of business reorganization:</p>
+                                <ul class="text-yellow-700 text-sm space-y-1 ml-4">
+                                    <li>• Merger, acquisition, or sale of business assets</li>
+                                    <li>• Bankruptcy or insolvency proceedings</li>
+                                    <li>• Corporate restructuring or reorganization</li>
+                                    <li>• Customer data may be transferred to the new entity</li>
+                                    <li>• You will be notified of any such transfer</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-100 rounded-lg p-6 mt-6">
+                            <h4 class="font-semibold text-gray-900 mb-3">Data Protection Safeguards</h4>
+                            <p class="text-gray-700 text-sm mb-3">
+                                When we share information with third parties, we ensure:
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <ul class="text-gray-600 text-sm space-y-1">
+                                    <li>✓ Contractual data protection obligations</li>
+                                    <li>✓ Minimum necessary information sharing</li>
+                                    <li>✓ Purpose limitation and usage restrictions</li>
+                                </ul>
+                                <ul class="text-gray-600 text-sm space-y-1">
+                                    <li>✓ Security requirements and audits</li>
+                                    <li>✓ Data retention and deletion policies</li>
+                                    <li>✓ Regular compliance monitoring</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 5. Data Security -->
+                    <section id="security" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">5</span>
+                            Data Security Measures
+                        </h2>
+
+                        <div class="bg-gradient-to-br from-green-500 to-blue-500 text-white rounded-xl p-8 mb-8">
+                            <div class="text-center">
+                                <div class="bg-white bg-opacity-20 rounded-full p-4 inline-block mb-4">
+                                    <svg class="h-12 w-12" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-3">Enterprise-Grade Security</h3>
+                                <p class="text-lg opacity-90">
+                                    We implement multiple layers of security to protect your personal information from unauthorized access, use, or disclosure.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-white border border-blue-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-blue-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Encryption</h4>
+                                <p class="text-gray-600 text-sm">
+                                    All data transmission uses SSL/TLS encryption. Sensitive data is encrypted at rest using industry-standard algorithms.
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-green-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-green-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Access Controls</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Role-based access controls ensure only authorized personnel can access customer data on a need-to-know basis.
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-purple-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-purple-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Regular Audits</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Regular security audits, penetration testing, and vulnerability assessments ensure our defenses remain strong.
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-red-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-red-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Incident Response</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Comprehensive incident response plan with immediate notification procedures for any potential data breaches.
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-yellow-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-yellow-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Staff Training</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Regular training programs ensure all staff understand data protection obligations and security best practices.
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-indigo-200 rounded-lg p-6 shadow-sm">
+                                <div class="bg-indigo-100 rounded-full p-3 inline-block mb-4">
+                                    <svg class="h-6 w-6 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Monitoring</h4>
+                                <p class="text-gray-600 text-sm">
+                                    24/7 monitoring systems detect and alert us to any suspicious activity or unauthorized access attempts.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+                            <h4 class="font-semibold text-orange-900 mb-2 flex items-center">
+                                <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                </svg>
+                                Your Role in Data Security
+                            </h4>
+                            <p class="text-orange-800 text-sm mb-3">
+                                While we implement strong security measures, you can help protect your information by:
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <ul class="text-orange-700 text-sm space-y-1">
+                                    <li>• Using strong, unique passwords</li>
+                                    <li>• Keeping login credentials confidential</li>
+                                    <li>• Logging out from shared devices</li>
+                                </ul>
+                                <ul class="text-orange-700 text-sm space-y-1">
+                                    <li>• Reporting suspicious activities</li>
+                                    <li>• Keeping contact information updated</li>
+                                    <li>• Being cautious with public Wi-Fi</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Continue with remaining sections... -->
+                    <!-- 6. Data Retention -->
+                    <section id="retention" class="privacy-section mb-12">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">6</span>
+                            Data Retention Policy
+                        </h2>
+                        
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-3">Retention Principle</h3>
+                            <p class="text-blue-800">
+                                We retain your personal information only for as long as necessary to fulfill the purposes for which it was collected, comply with legal obligations, resolve disputes, and enforce our agreements.
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                    <h4 class="font-semibold text-green-900 mb-2">Customer Account Data</h4>
+                                    <p class="text-green-700 text-sm mb-2"><strong>Retention:</strong> Active accounts + 3 years after closure</p>
+                                    <p class="text-green-600 text-xs">Includes contact info, purchase history, preferences</p>
+                                </div>
+                                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                                    <h4 class="font-semibold text-purple-900 mb-2">Transaction Records</h4>
+                                    <p class="text
+
+                                    
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
