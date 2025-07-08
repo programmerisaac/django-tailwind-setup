@@ -1,0 +1,9 @@
+-r base.txt
+ipython
+django-debug-toolbar
+# django-extensions
+# django-coverage
+# django-coverage-plugin
+# coverage
+# pytest
+# pytest-django
