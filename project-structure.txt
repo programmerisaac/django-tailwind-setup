@@ -1,0 +1,9 @@
+-media
+-pages
+-requirements/base.txt
+-static
+templates
+website
+.env.dev
+.env.prod
+manage.py
