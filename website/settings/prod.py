@@ -1,11 +1,11 @@
-# website/settings/production.py
+# website/settings/prod.py
 """
-Production Django settings for Onehux SSO System
+Production Django settings for Onehux Web Service
 ===============================================
 Production-specific settings that inherit from base.py
 Optimized for production deployment with nginx/gunicorn.
 
-Author: Isaac 
+Author: Isaac
 """
 
 from .base import *
@@ -16,17 +16,16 @@ from datetime import timedelta
 
 # Override environment file for production
 env = environ.Env()
-environ.Env.read_env(BASE_DIR / '.env.prod')
+environ.Env.read_env(BASE_DIR / 'prod.env')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
 
 # Production allowed hosts (strict)
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[
-    'onehux.com',
-    'www.onehux.com',
-    '*.onehux.com',
-    'accounts.onehux.com',
+    'onehuxwebservice.com',
+    'www.onehuxwebservice.com',
+    '*.onehuxwebservice.com',
 ])
 
 # ============================================================================
@@ -70,13 +69,8 @@ SESSION_COOKIE_SAMESITE = 'Strict'
 # CORS SETTINGS (PRODUCTION - STRICT)
 # ============================================================================
 CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
-    "https://onehux.com",
-    "https://www.onehux.com",
-    "https://ows.onehux.com",
-    "https://downloader.onehux.com",
-    "https://courier.onehux.com",
-    "https://app.onehux.com",
-    "https://admin.onehux.com",
+    "https://onehuxwebservice.com",
+    "https://www.onehuxwebservice.com",
 ])
 
 CORS_ALLOW_HEADERS = [
@@ -92,11 +86,8 @@ CORS_ALLOW_HEADERS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://accounts.google.com',
-    'https://login.microsoftonline.com',
-    'https://www.linkedin.com',
-    'https://accounts.onehux.com',
-    'https://api.linkedin.com',
+    'https://onehuxwebservice.com',
+    'https://www.onehuxwebservice.com',
 ]
 
 # ============================================================================
@@ -115,32 +106,27 @@ CELERY_BEAT_ENABLED = env.bool('CELERY_BEAT_ENABLED', default=True)
 if CELERY_BEAT_ENABLED:
     CELERY_BEAT_SCHEDULE = {
         # Session cleanup - Daily at 2 AM
-        f'{BASE_URL.replace(".", "_").replace(":", "_")}_cleanup_expired_sessions': {
+        f'{SITE_NAME}_cleanup_expired_sessions': {
             'task': 'users.tasks.cleanup_expired_sessions',
             'schedule': crontab(hour=2, minute=0),
         },
         # Weekly analytics report - Mondays at 1 AM
-        f'{BASE_URL.replace(".", "_").replace(":", "_")}_generate_weekly_reports': {
-            'task': 'users.tasks.generate_all_tenants_analytics',
+        f'{SITE_NAME}_generate_weekly_reports': {
+            'task': 'users.tasks.generate_weekly_analytics',
             'schedule': crontab(hour=1, minute=0, day_of_week=1),
         },
         # User activity analysis - Every 6 hours
-        f'{BASE_URL.replace(".", "_").replace(":", "_")}_analyze_user_activity': {
+        f'{SITE_NAME}_analyze_user_activity': {
             'task': 'users.tasks.analyze_user_activity_patterns',
             'schedule': crontab(minute=0, hour='*/6'),
         },
-        # SSO token cleanup - Every 4 hours
-        f'{BASE_URL.replace(".", "_").replace(":", "_")}_cleanup_sso_tokens': {
-            'task': 'users.tasks.cleanup_expired_sso_tokens',
-            'schedule': crontab(minute=30, hour='*/4'),
-        },
         # Daily health check - Every morning at 6 AM
-        f'{BASE_URL.replace(".", "_").replace(":", "_")}_daily_health_check': {
+        f'{SITE_NAME}_daily_health_check': {
             'task': 'users.tasks.worker_health_check',
             'schedule': crontab(hour=6, minute=0),
         },
         # Database maintenance - Every Sunday at 3 AM
-        f'{BASE_URL.replace(".", "_").replace(":", "_")}_database_maintenance': {
+        f'{SITE_NAME}_database_maintenance': {
             'task': 'users.tasks.database_maintenance',
             'schedule': crontab(hour=3, minute=0, day_of_week=0),
         },
@@ -197,14 +183,6 @@ LOGGING.update({
             'backupCount': 10,
             'formatter': 'celery',
         },
-        'file_sso': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_DIR, 'sso_auth.log'),
-            'maxBytes': 1024 * 1024 * 20,  # 20MB
-            'backupCount': 10,
-            'formatter': 'verbose',
-        },
         'file_security': {
             'level': 'WARNING',
             'class': 'logging.handlers.RotatingFileHandler',
@@ -220,14 +198,6 @@ LOGGING.update({
             'maxBytes': 1024 * 1024 * 50,  # 50MB
             'backupCount': 20,
             'formatter': 'verbose',
-        },
-        'file_performance': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_DIR, 'performance.log'),
-            'maxBytes': 1024 * 1024 * 30,  # 30MB
-            'backupCount': 10,
-            'formatter': 'json',
         },
         'mail_admins': {
             'level': 'ERROR',
@@ -267,33 +237,8 @@ LOGGING.update({
             'level': 'INFO',
             'propagate': False,
         },
-        'tenants': {
+        'pages': {
             'handlers': ['file_general', 'file_error'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'service_providers': {
-            'handlers': ['file_general', 'file_error'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'sso_auth': {
-            'handlers': ['file_sso', 'file_security'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'performance': {
-            'handlers': ['file_performance'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'social_django': {
-            'handlers': ['file_general'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'social_core': {
-            'handlers': ['file_general'],
             'level': 'INFO',
             'propagate': False,
         },
@@ -340,48 +285,22 @@ CACHES['sessions'].update({
 # ============================================================================
 # STATIC FILES CONFIGURATION (FOR NGINX)
 # ============================================================================
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# WhiteNoise configuration
+WHITENOISE_USE_FINDERS = False
+WHITENOISE_AUTOREFRESH = False
+WHITENOISE_SKIP_COMPRESS_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'zip', 'gz', 'tgz', 'bz2', 'tbz', 'xz', 'br']
 
 # ============================================================================
-# MEDIA FILES CONFIGURATION (S3 OPTIONAL)
+# EMAIL CONFIGURATION (PRODUCTION)
 # ============================================================================
-if env.bool('USE_S3_MEDIA', default=False):
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    AWS_ACCESS_KEY_ID = env.str('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = env.str('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_REGION_NAME = env.str('AWS_S3_REGION_NAME', default='us-east-1')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_DEFAULT_ACL = None
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
-    }
-
-# ============================================================================
-# PRODUCTION DATA RETENTION & BACKUP
-# ============================================================================
-DATA_RETENTION_DAYS = env.int('DATA_RETENTION_DAYS', default=365)
-BACKUP_ENABLED = env.bool('BACKUP_ENABLED', default=True)
-BACKUP_STORAGE_PATH = env.str('BACKUP_STORAGE_PATH', default='/backups/onehux_sso')
-BACKUP_RETENTION_DAYS = env.int('BACKUP_RETENTION_DAYS', default=90)
-
-# ============================================================================
-# PRODUCTION MONITORING
-# ============================================================================
-HEALTH_CHECK_ENDPOINTS = env.list('HEALTH_CHECK_ENDPOINTS', default=[
-    '/health/',
-    '/status/',
-    '/api/health/',
-])
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # ============================================================================
 # ENVIRONMENT INDICATOR
 # ============================================================================
 ENVIRONMENT = 'production'
-
-# Social Auth redirect (production URLs)
-SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 # Production warning check
 if DEBUG:
@@ -397,9 +316,6 @@ Database: {DATABASES['default']['NAME']}@{DATABASES['default']['HOST']}
 Redis: {CELERY_BROKER_URL.split('@')[-1] if '@' in CELERY_BROKER_URL else CELERY_BROKER_URL}
 SSL Redirect: {SECURE_SSL_REDIRECT}
 Celery Beat: {CELERY_BEAT_ENABLED}
+Static Storage: {STATICFILES_STORAGE}
 ===================================
 """)
-
-
-
-

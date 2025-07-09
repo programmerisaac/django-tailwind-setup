@@ -1,0 +1,71 @@
+# /etc/systemd/system/onehux-web.service
+# Systemd service file for Onehux Web Service (Gunicorn)
+# 
+# Installation:
+# 1. Copy this file to /etc/systemd/system/onehux-web.service
+# 2. Update the paths and user information below
+# 3. Run: sudo systemctl daemon-reload
+# 4. Run: sudo systemctl enable onehux-web
+# 5. Run: sudo systemctl start onehux-web
+
+[Unit]
+Description=Onehux Web Service (Gunicorn)
+Requires=onehux-web.socket
+After=network.target
+
+[Service]
+Type=notify
+# The specific user that our service will run as
+User=onehux
+Group=onehux
+
+# The directory from which our service will run
+WorkingDirectory=/home/onehux/onehux-web-service
+
+# Environment variables
+Environment=DJANGO_ENV=production
+Environment=DJANGO_SETTINGS_MODULE=website.settings.prod
+Environment=DJANGO_ENV_FILE=/home/onehux/onehux-web-service/prod.env
+
+# Path to virtual environment and gunicorn
+ExecStart=/home/onehux/onehux-web-service/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/onehux-web.sock \
+          --worker-class gevent \
+          --worker-connections 1000 \
+          --max-requests 1000 \
+          --max-requests-jitter 100 \
+          --timeout 30 \
+          --keep-alive 2 \
+          --preload \
+          website.wsgi:application
+
+# Restart policy
+Restart=on-failure
+RestartSec=5
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/home/onehux/onehux-web-service
+ReadWritePaths=/run
+ReadWritePaths=/tmp
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=4096
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=onehux-web
+
+# Environment variables from file
+EnvironmentFile=/home/onehux/onehux-web-service/prod.env
+
+[Install]
+WantedBy=multi-user.target
+

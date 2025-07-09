@@ -1,0 +1,28 @@
+# /etc/systemd/system/onehux-web.socket
+# Systemd socket file for Onehux Web Service (Gunicorn)
+#
+# Installation:
+# 1. Copy this file to /etc/systemd/system/onehux-web.socket
+# 2. Run: sudo systemctl daemon-reload
+# 3. Run: sudo systemctl enable onehux-web.socket
+# 4. Run: sudo systemctl start onehux-web.socket
+
+[Unit]
+Description=Onehux Web Service Socket
+PartOf=onehux-web.service
+
+[Socket]
+ListenStream=/run/onehux-web.sock
+
+# Socket permissions
+SocketUser=www-data
+SocketGroup=www-data
+SocketMode=0660
+
+# Socket options
+Backlog=512
+NoDelay=true
+
+[Install]
+WantedBy=sockets.target
+

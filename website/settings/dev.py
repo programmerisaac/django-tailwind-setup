@@ -1,10 +1,10 @@
-# website/settings/development.py
+# website/settings/dev.py
 """
-Development Django settings for Onehux SSO System
+Development Django settings for Onehux Web Service
 ================================================
 Development-specific settings that inherit from base.py
 
-Author: Isaac Onehux
+Author: Isaac
 """
 
 from .base import *
@@ -13,7 +13,7 @@ from datetime import timedelta
 
 # Override environment file for development
 env = environ.Env()
-environ.Env.read_env(BASE_DIR / '.env.dev')
+environ.Env.read_env(BASE_DIR / 'dev.env')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=True)
@@ -22,11 +22,10 @@ DEBUG = env.bool('DEBUG', default=True)
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[
     'localhost', 
     '127.0.0.1', 
-    'accounts.onehux.com', 
-    'dev.accounts.onehux.com'
+    'dev.onehuxwebservice.com',
+    '*'  # Allow all hosts in development
 ])
 
-ALLOWED_HOSTS = ["*"]
 # ============================================================================
 # DEVELOPMENT DATABASE CONFIGURATION
 # ============================================================================
@@ -50,8 +49,8 @@ SESSION_COOKIE_SAMESITE = 'Lax'
 # ============================================================================
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
-    'http://localhost:8001',
-    'http://127.0.0.1:8001',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
     'http://localhost:3000',
     'http://127.0.0.1:3000',
 ])
@@ -59,13 +58,13 @@ CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
-    'https://dev.accounts.onehux.com',
+    'https://dev.onehuxwebservice.com',
 ]
 
 # ============================================================================
 # CELERY CONFIGURATION (DEVELOPMENT)
 # ============================================================================
-CELERY_TASK_ALWAYS_EAGER = True  # Run tasks synchronously
+CELERY_TASK_ALWAYS_EAGER = env.bool('CELERY_TASK_ALWAYS_EAGER', default=True)  # Run tasks synchronously
 CELERY_TASK_EAGER_PROPAGATES = True
 CELERY_TASK_STORE_EAGER_RESULT = True
 CELERY_WORKER_PREFETCH_MULTIPLIER = 1
@@ -78,11 +77,11 @@ CELERY_BEAT_SCHEDULE = {}
 
 if CELERY_BEAT_ENABLED:
     CELERY_BEAT_SCHEDULE = {
-        f'{BASE_URL.replace(".", "_").replace(":", "_")}_dev_health_check': {
-            'task': 'users.tasks.development_health_check',
+        f'{SITE_NAME}_dev_health_check': {
+            'task': 'users.tasks.worker_health_check',
             'schedule': timedelta(minutes=5),
         },
-        f'{BASE_URL.replace(".", "_").replace(":", "_")}_cleanup_expired_sessions': {
+        f'{SITE_NAME}_cleanup_expired_sessions': {
             'task': 'users.tasks.cleanup_expired_sessions',
             'schedule': timedelta(minutes=30),
         },
@@ -130,12 +129,6 @@ LOGGING.update({
             'filename': os.path.join(LOG_DIR, 'celery_dev.log'),
             'formatter': 'celery',
         },
-        'file_sso': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOG_DIR, 'sso_auth_dev.log'),
-            'formatter': 'verbose',
-        },
     },
     'loggers': {
         'django': {
@@ -163,32 +156,7 @@ LOGGING.update({
             'level': 'DEBUG',
             'propagate': False,
         },
-        'tenants': {
-            'handlers': ['console', 'file_general'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        'service_providers': {
-            'handlers': ['console', 'file_general'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        'sso_auth': {
-            'handlers': ['file_sso'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        'social_django': {
-            'handlers': ['console', 'file_general'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        'social_core': {
-            'handlers': ['console', 'file_general'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        'users.social_pipeline': {
+        'pages': {
             'handlers': ['console', 'file_general'],
             'level': 'DEBUG',
             'propagate': False,
@@ -230,7 +198,7 @@ if env.bool('ENABLE_DEBUG_TOOLBAR', default=True):
     }
 
 # Django Extensions
-if env.bool('ENABLE_DJANGO_EXTENSIONS', default=True):
+if env.bool('ENABLE_DJANGO_EXTENSIONS', default=False):
     DEV_APPS.append('django_extensions')
     SHELL_PLUS_PRINT_SQL = True
     SHELL_PLUS_PRINT_SQL_TRUNCATE = 1000
@@ -243,46 +211,8 @@ INSTALLED_APPS += DEV_APPS
 # ============================================================================
 ENVIRONMENT = 'development'
 
-# Disable CSP in development for easier debugging
-ONEHUX_CSP_ENABLED = False
-
-# Social Auth redirect (development URLs)
-SOCIAL_AUTH_REDIRECT_IS_HTTPS = False
-
-
-# ============================================================================
-# WEBAUTHN SETTINGS FOR LOCAL DEVELOPMENT (FIXED)
-# ============================================================================
-
-# WebAuthn requires proper domain setup
-# For local development, you need to add this to your /etc/hosts file:
-# 127.0.0.1 dev.accounts.onehux.com
-
-# Use the custom domain for WebAuthn
-WEBAUTHN_RP_ID = 'dev.accounts.onehux.com'
-WEBAUTHN_RP_NAME = 'Onehux Accounts (Dev)'
-WEBAUTHN_ORIGIN = 'http://dev.accounts.onehux.com:8000'
-
-# Alternative for pure localhost (less secure but works)
-# WEBAUTHN_RP_ID = 'localhost'
-# WEBAUTHN_RP_NAME = 'Onehux Accounts (Local)'
-# WEBAUTHN_ORIGIN = 'http://localhost:8000'
-
-# Allow platform authenticators in development
-WEBAUTHN_AUTHENTICATOR_ATTACHMENT = 'platform'  # or 'cross-platform' for USB keys
-
-# Timeout for WebAuthn operations (in milliseconds)
-WEBAUTHN_TIMEOUT = 60000  # 60 seconds
-
-# User verification requirement
-WEBAUTHN_USER_VERIFICATION = 'preferred'  # 'required', 'preferred', or 'discouraged'
-
-# Ensure HTTPS is not required for localhost (development only)
-WEBAUTHN_REQUIRE_HTTPS = False
-
-
-
-
+# Email backend for development (console)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Print development configuration summary
 if DEBUG:
@@ -297,7 +227,12 @@ Beat Enabled: {CELERY_BEAT_ENABLED}
 CORS Allow All: {CORS_ALLOW_ALL_ORIGINS}
 Rate Limiting: {RATELIMIT_ENABLE}
 Environment: {ENVIRONMENT}
+Email Backend: {EMAIL_BACKEND}
 ====================================
 """)
 
+# Static files configuration for development
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
+# Media files served by Django in development
+MEDIA_URL = '/media/'

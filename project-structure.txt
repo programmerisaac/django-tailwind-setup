@@ -4,6 +4,6 @@
 -static
 templates
 website
-.env.dev
-.env.prod
+dev.env
+prod.env
 manage.py

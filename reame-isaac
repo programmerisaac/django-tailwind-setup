@@ -1,0 +1,9 @@
+# For development (with watch mode)
+npm run watch
+
+# Or for a one-time build
+npm run dev
+
+# For production (minified)
+npm run prod
+

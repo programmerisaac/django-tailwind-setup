@@ -1,0 +1,347 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>{% block title %}{{ page_title|default:"Professional Website Development Services - Onehux Web Service" }}{% endblock %}</title>
+    <meta name="title" content="{% block meta_title %}{{ page_title|default:"Professional Website Development Services - Onehux Web Service" }}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{{ meta_description|default:site_meta.site_description }}{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}{{ meta_keywords|default:site_meta.site_keywords }}{% endblock %}">
+    <meta name="author" content="{% block meta_author %}{{ site_meta.site_author }}{% endblock %}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{% block canonical_url %}{{ canonical_url|default:request.build_absolute_uri }}{% endblock %}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{{ canonical_url|default:request.build_absolute_uri }}{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}{{ page_title|default:site_meta.site_name }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ meta_description|default:site_meta.site_description }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ base_url }}{{ site_meta.og_image }}{% endblock %}">
+    <meta property="og:site_name" content="{{ site_meta.site_name }}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="{% block twitter_card %}{{ site_meta.twitter_card }}{% endblock %}">
+    <meta property="twitter:url" content="{% block twitter_url %}{{ canonical_url|default:request.build_absolute_uri }}{% endblock %}">
+    <meta property="twitter:title" content="{% block twitter_title %}{{ page_title|default:site_meta.site_name }}{% endblock %}">
+    <meta property="twitter:description" content="{% block twitter_description %}{{ meta_description|default:site_meta.site_description }}{% endblock %}">
+    <meta property="twitter:image" content="{% block twitter_image %}{{ base_url }}{{ site_meta.og_image }}{% endblock %}">
+    {% if site_meta.twitter_site %}<meta property="twitter:site" content="{{ site_meta.twitter_site }}">{% endif %}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ base_url }}/static/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ base_url }}/static/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ base_url }}/static/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ base_url }}/static/images/favicon-16x16.png">
+    <link rel="manifest" href="{{ base_url }}/static/manifest.json">
+    
+    <!-- DNS Prefetch -->
+    {% for domain in dns_prefetch %}
+    <link rel="dns-prefetch" href="{{ domain }}">
+    {% endfor %}
+    
+    <!-- Preconnect -->
+    {% for domain in preconnect %}
+    <link rel="preconnect" href="{{ domain }}" crossorigin>
+    {% endfor %}
+    
+    <!-- Stylesheets -->
+    {% load static %}
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    
+    <!-- Custom CSS Variables -->
+    <style>
+        :root {
+            --color-primary: {{ colors.PRIMARY }};
+            --color-secondary: {{ colors.SECONDARY }};
+            --color-success: {{ colors.SUCCESS }};
+            --color-error: {{ colors.ERROR }};
+            --color-warning: {{ colors.WARNING }};
+            --color-info: {{ colors.INFO }};
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-primary);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0f3a8a;
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body class="bg-white text-gray-900 antialiased" x-data="{ 
+    mobileMenuOpen: false,
+    scrolled: false 
+}" x-init="
+    window.addEventListener('scroll', () => {
+        scrolled = window.scrollY > 10;
+    });
+">
+    
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded-lg z-50">
+        Skip to main content
+    </a>
+    
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-40 transition-all duration-300"
+            :class="scrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'">
+        {% include 'components/header.html' %}
+    </header>
+    
+    <!-- Main Content -->
+    <main id="main-content" class="pt-20">
+        <!-- Flash Messages -->
+        {% if messages %}
+            <div class="fixed top-24 right-4 z-50 space-y-2" x-data="{ messages: true }" x-show="messages">
+                {% for message in messages %}
+                    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg p-4 
+                                {% if message.tags == 'error' %}border-red-500 bg-red-50
+                                {% elif message.tags == 'success' %}border-green-500 bg-green-50
+                                {% elif message.tags == 'warning' %}border-yellow-500 bg-yellow-50
+                                {% elif message.tags == 'info' %}border-blue-500 bg-blue-50
+                                {% endif %}"
+                         x-data="{ show: true }" 
+                         x-show="show"
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform translate-x-full"
+                         x-transition:enter-end="opacity-100 transform translate-x-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-x-0"
+                         x-transition:leave-end="opacity-0 transform translate-x-full"
+                         x-init="setTimeout(() => show = false, 5000)">
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                {% if message.tags == 'error' %}
+                                    <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                    </svg>
+                                {% elif message.tags == 'success' %}
+                                    <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                {% elif message.tags == 'warning' %}
+                                    <svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                    </svg>
+                                {% else %}
+                                    <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                    </svg>
+                                {% endif %}
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <p class="text-sm font-medium 
+                                         {% if message.tags == 'error' %}text-red-800
+                                         {% elif message.tags == 'success' %}text-green-800
+                                         {% elif message.tags == 'warning' %}text-yellow-800
+                                         {% elif message.tags == 'info' %}text-blue-800
+                                         {% endif %}">
+                                    {{ message }}
+                                </p>
+                            </div>
+                            <div class="ml-4 flex-shrink-0">
+                                <button @click="show = false" class="inline-flex text-gray-400 hover:text-gray-600 focus:outline-none">
+                                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <!-- Page Content -->
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        {% include 'components/footer.html' %}
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+            x-show="scrolled"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform translate-y-2"
+            x-transition:enter-end="opacity-100 transform translate-y-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 transform translate-y-0"
+            x-transition:leave-end="opacity-0 transform translate-y-2"
+            class="fixed bottom-8 right-8 bg-primary hover:bg-primary/90 text-white p-3 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 z-30">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+        <span class="sr-only">Back to top</span>
+    </button>
+    
+    <!-- Mobile Menu Overlay -->
+    <div x-show="mobileMenuOpen" 
+         x-transition:enter="transition-opacity ease-linear duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity ease-linear duration-300"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+         @click="mobileMenuOpen = false"></div>
+    
+    <!-- JavaScript Libraries -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- HTMX for dynamic interactions -->
+    <script src="https://unpkg.com/htmx.org@1.9.10/dist/htmx.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Toast notification system
+        window.showToast = function(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `fixed top-24 right-4 z-50 max-w-sm bg-white border rounded-lg shadow-lg p-4 transition-all duration-300 transform translate-x-full`;
+            
+            const colors = {
+                success: 'border-green-500 bg-green-50',
+                error: 'border-red-500 bg-red-50',
+                warning: 'border-yellow-500 bg-yellow-50',
+                info: 'border-blue-500 bg-blue-50'
+            };
+            
+            toast.className += ` ${colors[type] || colors.info}`;
+            toast.innerHTML = `
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-${type === 'success' ? 'green' : type === 'error' ? 'red' : type === 'warning' ? 'yellow' : 'blue'}-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <p class="text-sm font-medium text-${type === 'success' ? 'green' : type === 'error' ? 'red' : type === 'warning' ? 'yellow' : 'blue'}-800">
+                            ${message}
+                        </p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-4 flex-shrink-0 text-gray-400 hover:text-gray-600">
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Animate in
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full');
+                toast.classList.add('translate-x-0');
+            }, 100);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+        };
+        
+        // Smooth scrolling for anchor links
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+        
+        // Form validation helper
+        window.validateForm = function(formElement) {
+            const requiredFields = formElement.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+            
+            return isValid;
+        };
+    </script>
+    
+    <!-- Structured Data for SEO -->
+    {% if structured_data %}
+    <script type="application/ld+json">
+        {{ structured_data|safe }}
+    </script>
+    {% endif %}
+    
+    <!-- Analytics -->
+    {% if not debug %}
+        {% if google_analytics_id %}
+        <!-- Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics_id }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '{{ google_analytics_id }}');
+        </script>
+        {% endif %}
+        
+        {% if facebook_pixel_id %}
+        <!-- Facebook Pixel -->
+        <script>
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '{{ facebook_pixel_id }}');
+            fbq('track', 'PageView');
+        </script>
+        <noscript>
+            <img height="1" width="1" style="display:none" 
+                 src="https://www.facebook.com/tr?id={{ facebook_pixel_id }}&ev=PageView&noscript=1"/>
+        </noscript>
+        {% endif %}
+    {% endif %}
+    
+    <!-- Custom JavaScript -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+

@@ -1,6 +1,6 @@
 # website/settings/base.py
 """
-Base Django settings for Basic Django System
+Base Django settings for Onehux Web Service
 ==========================================
 Common settings shared between development and production environments.
 
@@ -22,8 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Creating an instance of Env class for managing environment variables
 env = environ.Env()
 
-# Read the .env file passed via environment variable or default to `.env.dev`
-ENV_PATH = os.getenv('DJANGO_ENV_FILE', BASE_DIR / 'website/.env.dev')
+# Read the environment file passed via environment variable or default to `dev.env`
+ENV_PATH = os.getenv('DJANGO_ENV_FILE', BASE_DIR / 'dev.env')
 environ.Env.read_env(env_file=ENV_PATH)
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -46,10 +46,13 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',#Added
+    'django.contrib.sites',#Added
 ]
 
 THIRD_PARTY_APPS = [
     'django_htmx',
+    'corsheaders',
 ]
 
 LOCAL_APPS = [
@@ -63,6 +66,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # For static files in production
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -86,6 +90,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'pages.context_processors.site_context',  # Custom context processor
             ],
         },
     },
@@ -112,6 +117,12 @@ ADMIN_LOGIN_PATH = env.str('ADMIN_LOGIN_PATH', default='/admin/')
 
 # Custom User Model
 AUTH_USER_MODEL = 'users.User'
+
+# Authentication URLs
+LOGIN_URL = 'users:login'
+LOGOUT_URL = 'users:logout'
+LOGIN_REDIRECT_URL = 'users:dashboard'  
+LOGOUT_REDIRECT_URL = 'pages:home'
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -161,7 +172,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-
 # Static files finders
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -172,45 +182,41 @@ STATICFILES_FINDERS = [
 MEDIA_URL_BASE = f"{BASE_URL}/media/"
 STATIC_URL_BASE = f"{BASE_URL}/static/"
 
-# # Authentication URLs
-# LOGIN_URL = 'users:login'
-# LOGOUT_URL = 'users:logout'
-# LOGIN_REDIRECT_URL = 'users:dashboard'  
-# LOGOUT_REDIRECT_URL = 'pages:home'
-
 # Onehux Company Information
 ONEHUX_COMPANY_INFO = {
-    'NAME': 'Onehux Accounts',
-    'SLOGAN': 'One Account All Services',
-    'ADDRESS': 'AIT Road, Alagbado Kola, Lagos State, Nigeria',
+    'NAME': 'Onehux Web Service',
+    'SLOGAN': 'Professional Website Development for Your Business',
+    'ADDRESS': 'Professional Web Development Services Worldwide',
     'SUPPORT_EMAIL': env('SUPPORT_EMAIL', default='support@onehux.com'),
-    'CONTACT_EMAIL': env('CONTACT_EMAIL', default='hi@onehux.com'),
-    'PHONE_SUPPORT': env('PHONE_SUPPORT', default='+2349078000901'),
-    'PHONE_ENQUIRY': env('PHONE_ENQUIRY', default='+2347066979977'),
+    'CONTACT_EMAIL': env('CONTACT_EMAIL', default='support@onehux.com'),
+    'PHONE_SUPPORT': env('PHONE_SUPPORT', default='+1 (555) 123-4567'),
+    'PHONE_ENQUIRY': env('PHONE_ENQUIRY', default='+1 (555) 987-6543'),
     'SOCIAL_MEDIA': {
-        'FACEBOOK': 'https://facebook.com/onehuxco',
-        'INSTAGRAM': 'https://instagram.com/onehuxco',
-        'X': 'https://x.com/onehuxco',
-        'TIKTOK': 'https://www.tiktok.com/@onehuxcoo',
-        'LINKEDIN': 'https://linkedin.com/company/onehuxco',
-        'YOUTUBE': 'https://www.youtube.com/@onehuxco',
+        'FACEBOOK': 'https://facebook.com/onehuxwebservice',
+        'INSTAGRAM': 'https://instagram.com/onehuxwebservice',
+        'X': 'https://x.com/onehuxweb',
+        'LINKEDIN': 'https://linkedin.com/company/onehuxwebservice',
+        'YOUTUBE': 'https://youtube.com/@onehuxwebservice',
     }
 }
 
 # Brand Colors
 ONEHUX_COLORS = {
-    'BLUE': '#154bba',
-    'YELLOW': '#f9d000',
+    'PRIMARY': '#154bba',  # Blue
+    'SECONDARY': '#f9d000',  # Yellow
+    'SUCCESS': '#10b981',  # Green
+    'ERROR': '#ef4444',  # Red
+    'WARNING': '#f59e0b',  # Orange
+    'INFO': '#3b82f6',  # Light Blue
 }
 
 # ============================================================================
 # REDIS CONFIGURATION
 # ============================================================================
 
-SITE_NAME = env.str('SITE_NAME', default='default')
+SITE_NAME = env.str('SITE_NAME', default='onehux_web_service')
 
 CELERY_TASK_DEFAULT_QUEUE = f'{SITE_NAME}_queue'
-
 
 REDIS_HOST = env.str('REDIS_HOST', default='localhost')
 REDIS_PORT = env.int('REDIS_PORT', default=6379)
@@ -248,8 +254,6 @@ CELERY_TASK_REJECT_ON_WORKER_LOST = True
 CELERY_TASK_DEFAULT_RETRY_DELAY = 60
 CELERY_TASK_MAX_RETRIES = 3
 
-
-
 # Cache Configuration
 CACHES = {
     'default': {
@@ -263,7 +267,7 @@ CACHES = {
                 'retry_on_timeout': True,
             },
         },
-        'KEY_PREFIX': f'onehux_sso_{BASE_URL.replace(".", "_").replace(":", "_")}',
+        'KEY_PREFIX': f'onehux_web_{BASE_URL.replace(".", "_").replace(":", "_")}',
         'TIMEOUT': 3600,
     },
     'sessions': {
@@ -347,32 +351,45 @@ LOGGING = {
     },
 }
 
-
-
-
-
 # ============================================================================
 # EMAIL CONFIGURATION
 # ============================================================================
 EMAIL_BACKEND = env.str('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
 
-EMAIL_ACCOUNTS = {
-    'zoho_hi': {
-        'HOST': env('EMAIL_ZOHO_HI_HOST', default=''),
-        'PORT': env.int('EMAIL_ZOHO_HI_PORT', default=587),
-        'USE_SSL': env.bool('EMAIL_ZOHO_HI_USE_SSL', default=True),
-        'USERNAME': env('EMAIL_ZOHO_HI_USERNAME', default=''),
-        'PASSWORD': env('EMAIL_ZOHO_HI_PASSWORD', default=''),
-        'from_email': 'Onehux <hi@onehux.com>',
-    },
-    'zoho_support': {
-        'HOST': env('EMAIL_ZOHO_SUPPORT_HOST', default=''),
-        'PORT': env.int('EMAIL_ZOHO_SUPPORT_PORT', default=587),
-        'USE_SSL': env.bool('EMAIL_ZOHO_SUPPORT_USE_SSL', default=True),
-        'USERNAME': env('EMAIL_ZOHO_SUPPORT_USERNAME', default=''),
-        'PASSWORD': env('EMAIL_ZOHO_SUPPORT_PASSWORD', default=''),
-    },
-}
+# Email configuration for production
+EMAIL_HOST = env.str('EMAIL_HOST', default='')
+EMAIL_PORT = env.int('EMAIL_PORT', default=587)
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD', default='')
 
 DEFAULT_FROM_EMAIL = env.str('DEFAULT_FROM_EMAIL', default='support@onehux.com')
 SERVER_EMAIL = env.str('SERVER_EMAIL', default='support@onehux.com')
+
+# ============================================================================
+# SEO AND METADATA CONFIGURATION
+# ============================================================================
+SITE_META = {
+    'site_name': 'Onehux Web Service',
+    'site_description': 'Professional website development services for businesses, e-commerce, portfolios, and web applications. Get a custom website that grows your business.',
+    'site_keywords': 'website development, web design, business websites, e-commerce development, professional web services',
+    'site_author': 'Onehux Web Service',
+    'og_image': '/static/images/og-image.jpg',
+    'twitter_card': 'summary_large_image',
+    'twitter_site': '@onehuxweb',
+}
+
+# ============================================================================
+# SECURITY SETTINGS (Base)
+# ============================================================================
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+
+# CORS settings (will be overridden in environment-specific files)
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = False
+
+# CSRF settings
+CSRF_COOKIE_NAME = 'csrftoken'
+CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'

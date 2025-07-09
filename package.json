@@ -1,0 +1,47 @@
+{
+  "name": "onehux-web-service",
+  "version": "1.0.0",
+  "description": "Professional Website Development Services - Onehux Web Service",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "tailwindcss -i ./website/static/css/input.css -o ./website/static/css/output.css --watch",
+    "build-css-prod": "tailwindcss -i ./website/static/css/input.css -o ./website/static/css/output.css --minify",
+    "dev": "npm run build-css",
+    "prod": "npm run build-css-prod",
+    "watch": "tailwindcss -i ./website/static/css/input.css -o ./website/static/css/output.css --watch",
+    "postinstall": "npm run build-css-prod"
+  },
+  "keywords": [
+    "django",
+    "tailwindcss",
+    "website-development",
+    "web-development",
+    "business-websites",
+    "ecommerce",
+    "web-applications"
+  ],
+  "author": "Onehux Web Service",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/onehux-web-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/onehux-web-service/issues"
+  },
+  "homepage": "https://onehuxwebservice.com"
+}

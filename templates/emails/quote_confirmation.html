@@ -1,0 +1,277 @@
+<!-- templates/emails/quote_confirmation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Request Confirmation - {{ site_name }}</title>
+    <style>
+        /* Email-safe CSS */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f8fafc;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #154bba, #1e40af);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .quote-details {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #154bba;
+        }
+        .detail-row {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #374151;
+            min-width: 140px;
+            margin-right: 15px;
+        }
+        .detail-value {
+            color: #6b7280;
+            flex: 1;
+        }
+        .timeline-info {
+            background-color: #10b981;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .next-steps {
+            background-color: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .step-number {
+            width: 24px;
+            height: 24px;
+            background-color: #f59e0b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            margin-right: 15px;
+            margin-top: 2px;
+        }
+        .contact-info {
+            background-color: #eff6ff;
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .footer {
+            background-color: #f8fafc;
+            padding: 30px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+            border-top: 1px solid #e5e7eb;
+        }
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin: 0 10px;
+            }
+            .header, .content, .footer {
+                padding: 20px;
+            }
+            .quote-details, .next-steps, .contact-info {
+                padding: 15px;
+            }
+            .detail-row {
+                flex-direction: column;
+            }
+            .detail-label {
+                min-width: auto;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">📋</div>
+            <h1 style="margin: 0; font-size: 24px;">Quote Request Received!</h1>
+            <p style="margin: 10px 0 0; opacity: 0.9;">We're excited to work on your project</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h2 class="title">Thank you, {{ quote.full_name }}! 🎉</h2>
+            
+            <p style="font-size: 16px; line-height: 1.6; text-align: center; color: #6b7280; margin-bottom: 30px;">
+                We've received your website development quote request and our team is already reviewing the details. 
+                You'll hear from us within 24 hours with a detailed proposal.
+            </p>
+
+            <!-- Quote Details -->
+            <div class="quote-details">
+                <h3 style="margin: 0 0 20px; color: #154bba; font-size: 18px;">📝 Your Project Details</h3>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Project Type:</div>
+                    <div class="detail-value">{{ quote.get_website_type_display }}</div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Budget Range:</div>
+                    <div class="detail-value">{{ quote.get_budget_range_display }}</div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Timeline:</div>
+                    <div class="detail-value">{{ quote.get_timeline_display }}</div>
+                </div>
+                
+                {% if quote.company_name %}
+                <div class="detail-row">
+                    <div class="detail-label">Company:</div>
+                    <div class="detail-value">{{ quote.company_name }}</div>
+                </div>
+                {% endif %}
+                
+                <div class="detail-row">
+                    <div class="detail-label">Description:</div>
+                    <div class="detail-value">{{ quote.project_description|truncatewords:30 }}</div>
+                </div>
+            </div>
+
+            <!-- Timeline Info -->
+            <div class="timeline-info">
+                <h3 style="margin: 0 0 10px; font-size: 20px;">⏱️ Estimated Timeline</h3>
+                <p style="margin: 0; font-size: 16px; opacity: 0.9;">
+                    {{ estimated_timeline }}
+                </p>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h3 style="margin: 0 0 20px; color: #f59e0b; font-size: 18px;">🚀 What Happens Next?</h3>
+                
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div>
+                        <strong>Project Review (Today)</strong><br>
+                        <span style="color: #6b7280;">Our team reviews your requirements and prepares a detailed proposal</span>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div>
+                        <strong>Quote Delivery (Within 24 hours)</strong><br>
+                        <span style="color: #6b7280;">You'll receive a comprehensive quote with timeline and pricing</span>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div>
+                        <strong>Consultation Call (Optional)</strong><br>
+                        <span style="color: #6b7280;">Free consultation to discuss your project in detail</span>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div>
+                        <strong>Project Kickoff</strong><br>
+                        <span style="color: #6b7280;">Once approved, we start bringing your vision to life</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h3 style="margin: 0 0 15px; color: #3b82f6; font-size: 18px;">💬 Questions?</h3>
+                <p style="margin: 0 0 15px; font-size: 16px;">
+                    Our team is here to help! Reach out anytime:
+                </p>
+                <p style="margin: 0; font-size: 16px;">
+                    📧 <a href="mailto:{{ contact_email }}" style="color: #154bba; text-decoration: none;">{{ contact_email }}</a><br>
+                    📞 <a href="tel:{{ support_phone }}" style="color: #154bba; text-decoration: none;">{{ support_phone }}</a>
+                </p>
+            </div>
+
+            <p style="font-size: 16px; color: #6b7280; text-align: center; margin-top: 30px; font-style: italic;">
+                "We're committed to delivering exceptional websites that drive real results for your business."
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p style="margin: 0 0 15px;">
+                <strong>{{ site_name }}</strong><br>
+                Professional Website Development Services
+            </p>
+            
+            <p style="margin: 20px 0 0; font-size: 12px; color: #9ca3af;">
+                This confirmation was sent to {{ quote.email }}. 
+                Quote Reference: #{{ quote.id|slice:":8" }}
+            </p>
+            
+            <p style="margin: 10px 0 0; font-size: 12px; color: #9ca3af;">
+                &copy; {% now "Y" %} {{ site_name }}. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
